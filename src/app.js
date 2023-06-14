@@ -1,6 +1,7 @@
 import express from 'express'
 import dotenv from 'dotenv'
 import mongoose from 'mongoose';
+import categoryRouter from './routes/category'
 
 
 dotenv.config()
@@ -20,6 +21,10 @@ mongoose.connect(`mongodb+srv://truonghvph16694:${process.env.MONGO_DB}@cluster0
 .catch((err) =>{
     console.log('Error', err)
 })
+
+//Router
+app.use("/api",categoryRouter)
+
 
 app.listen(port , () =>{
     console.log('Service is running on port', port);
