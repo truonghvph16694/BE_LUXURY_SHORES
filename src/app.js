@@ -21,7 +21,10 @@ const port = process.env.PORT || 8000;
 app.listen(port , () =>{
     console.log('Service is running on port', port);
 })
-// asdiuw
+
+
+
+// Dưới connect db atlat
 
 // import express from 'express'
 // import dotenv from 'dotenv'
