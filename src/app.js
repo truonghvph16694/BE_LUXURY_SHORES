@@ -4,7 +4,7 @@ import bodyParser from 'body-parser';
 import cors from "cors";
 import mongoose from 'mongoose';
 
-import routerOrders from './routers/routers';
+import routerOrders from './routers/orders';
 import morgan from 'morgan';
 
 dotenv.config()
@@ -15,7 +15,9 @@ app.use(morgan("tiny"))
 
 app.use("/api",routerOrders)
 
-mongoose.connect("mongodb://127.0.0.1:27017/datn");
+mongoose.connect("mongodb://127.0.0.1:27017/datn").then(() =>{
+        console.log('connect Db success!!');
+    });
 
 const port = process.env.PORT || 8000;
 app.listen(port , () =>{
