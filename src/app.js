@@ -4,7 +4,7 @@ import bodyParser from 'body-parser';
 import cors from "cors";
 import mongoose from 'mongoose';
 import categoryRouter from './routes/category'
-
+import productRouter from "./routes/product";
 import routerOrders from './routers/routers';
 import morgan from 'morgan';
 
@@ -16,7 +16,7 @@ app.use(morgan("tiny"))
 
 app.use("/api",routerOrders)
 
-mongoose.connect("mongodb://127.0.0.1:27017/datn");
+// mongoose.connect("mongodb://127.0.0.1:27017/datn");
 
 const port = process.env.PORT || 8000;
 
@@ -34,7 +34,8 @@ mongoose.connect(`mongodb+srv://truonghvph16694:${process.env.MONGO_DB}@cluster0
 })
 
 //Router
-app.use("/api",categoryRouter)
+app.use("/api",categoryRouter);
+app.use("/api", productRouter);
 
 
 app.listen(port , () =>{
