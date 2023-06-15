@@ -1,60 +1,102 @@
 import Category from '../models/category'
 import Joi from "joi";
+import dotenv from "dotenv";
+import slugify from 'slugify';
 
+dotenv.config();
 const categorySchema = Joi.object({
     name: Joi.string().required(),
 });
-// export const create = (req, res) => {
-//     const category = new Category(req.body);
-//     category.save((err, data) =>{
-//         if(err){
-//             return res.status(400).json({
-//                 error: "Không thêm được danh mục"
-//         })
-//     }
-//     res.json({data})
-// })
-// }
 
-// export const create = async (req, res) => {
-//     try {
-//         const category = await new Category(req.body).save();
-//         return res.json({
-//             successCode: 200,
-//             data: category,
-//         });
-//     } catch (error) {
-//         return res.json({
-//             errorCode: 400,
-//             message: "Can't add category",
-//         });
-//     }
-// };
-
-export const create = async (req, res) => {
+export const getAll = async (req, res) => {
     try {
-        const body = req.body  ;
-        console.log(body);
-        const { error } = categorySchema.validate(body);
-        if (error) {
-            const errors = error.details.map((errorItem) => errorItem.message);
-            return res.status(400).json({
-                message: errors,
+        const categories = await Category.find();
+        if (categories.length === 0) {
+            return res.json({
+                message: "Không có danh mục nào",
             });
         }
-
-        const data = await Category.create(body);
-        if (!data) {
-            return res.status(400).json({ message: "Thêm danh mục thất bại" });
-        }
-        return res.json({
-            message: "Thêm danh mục thành công",
-            data,
-        });
+        return res.json(categories);
     } catch (error) {
-        return res.json({
+        return res.status(400).json({
             message: error.message,
         });
     }
 };
+export const get = async function (req, res) {
+    try {
+        const category = await Category.findById(req.params.id)  //.populate("products");
+        if (!category) {
+            return res.json({
+                message: "Không có danh mục nào",
+            });
+        }
+        return res.json(category);
+    } catch (error) {
+        return res.status(400).json({
+            message: error.message,
+        });
+    }
+};
+export const create = async function (req, res) {
+    try {
+        const body = req.body;
+        console.log(body);
+        const { error } = categorySchema.validate(body);
+        
+        if (error) {
+            return res.status(400).json({
+                message: error.details[0].message,
+            });
+        }
+        const order = await Category.create(req.body);
+        console.log(order);
+        if (!order) {
+            return res.json({
+                message: "Không thêm được danh mục",
+            });
+        }
+        return res.json({
+            message: "Thêm danh mục thành công",
+            data: order,
 
+        });
+
+    } catch (error) {
+        return res.status(400).json({
+            message: error,
+        });
+    }
+};
+export const update = async function (req, res) {
+    try {
+        const category2 = await Category.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        console.log(category2);
+        if (!category2) {
+            return res.json({
+                message: "Cập nhật danh mục không thành công",
+            });
+        }
+        return res.json({
+            message: "Cập nhật danh mục thành công",
+            category2,
+        });
+    } catch (error) {
+        return res.status(400).json({
+            message: error.message,
+        });
+    }
+};
+export const remove = async function (req, res) {
+    try {
+        const category = await Category.findByIdAndDelete(req.params.id);
+        return res.json({
+            message: "Xóa danh mục thành công",
+            category,
+        });
+    } catch (error) {
+        return res.status(400).json({
+            message: error.message,
+        });
+    }
+};

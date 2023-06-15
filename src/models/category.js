@@ -1,11 +1,13 @@
 import mongoose from "mongoose";
-const CategorySchema = mongoose.Schema({
-    name:{
-        type:String,
-        trim:true,
-        required:true,
-        maxLength:32
-    }
-},{timeStamps: true});
+import mongoosePaginate from "mongoose-paginate-v2";
 
-module.exports = mongoose.model("Category", CategorySchema);
+const categorySchema = new mongoose.Schema({
+    name:{
+        type: String,
+        require: true,
+        minLength: 3,
+    }
+},{timestamps: true});
+categorySchema.plugin(mongoosePaginate);
+
+export default mongoose.model("Category", categorySchema);
