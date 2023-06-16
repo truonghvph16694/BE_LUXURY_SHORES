@@ -2,6 +2,7 @@ import dotenv from "dotenv";
 import joi from "joi";
 import Product from "../models/product";
 import Category from "../models/category";
+// import Category from "../models/category";
 
 dotenv.config();
 const productSchema = joi.object({
@@ -9,6 +10,13 @@ const productSchema = joi.object({
     price: joi.number().required(),
     description: joi.string(),
     categoryId: joi.string().required(),
+    discount: joi.number().required(),
+    thumbnail: joi.number().required(),
+    description: joi.string().required(),
+    created_at: joi.date().required(),
+    updated_at: joi.date().required(),
+
+    // categoryId: joi.string().required(),
 });
 
 export const getAll = async (req, res) => {
@@ -49,6 +57,21 @@ export const getAll = async (req, res) => {
 //         });
 //     }
 // };
+export const get = async function (req, res) {
+    try {
+        const product = await Product.findById(req.params.id)
+        if (!product) {
+            return res.json({
+                message: "Không có sản phẩm nào",
+            });
+        }
+        return res.json(product);
+    } catch (error) {
+        return res.status(400).json({
+            message: error,
+        });
+    }
+};
 export const create = async function (req, res) {
     try {
         const { error } = productSchema.validate(req.body);
@@ -68,6 +91,7 @@ export const create = async function (req, res) {
                 products: product._id,
             },
         });
+        
         return res.json({
             message: "Thêm sản phẩm thành công",
             data: product,
@@ -110,3 +134,35 @@ export const create = async function (req, res) {
 //         });
 //     }
 // };
+export const update = async function (req, res) {
+    try {
+        const product = await Product.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        if (!product) {
+            return res.json({
+                message: "Cập nhật sản phẩm không thành công",
+            });
+        }
+        return res.json({
+            message: "Cập nhật sản phẩm thành công",
+            data: product,
+        });
+    } catch (error) {
+        return res.status(400).json({
+            message: error,
+        });
+    }
+};
+
+export const remove = async function (req, res) {
+    try {
+        const product = await Product.findByIdAndDelete(req.params.id);
+        return res.json({
+            message: "Xóa sản phẩm thành công",
+            product,
+        });
+    } catch (error) {
+        return res.status(400).json({
+            message: error,
+        });
+    }
+};

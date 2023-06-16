@@ -61,8 +61,6 @@ export const get = async function (req, res) {
 
 export const create = async function (req, res) {
     try {
-        const body = req.body;
-        console.log(body);
         const { error } = orderSchema.validate(req.body);
         
         if (error) {
@@ -72,16 +70,16 @@ export const create = async function (req, res) {
         }
         const order = await Orders.create(req.body);
         console.log(order);
-        // if (!order) {
-        //     return res.json({
-        //         message: "Không thể thêm đơn hàng",
-        //     });
-        // }
-        // return res.json({
-        //     message: "Thêm đơn hàng thành công",
-        //     data: order,
+        if (!order) {
+            return res.json({
+                message: "Không thể thêm đơn hàng",
+            });
+        }
+        return res.json({
+            message: "Thêm đơn hàng thành công",
+            data: order,
 
-        // });
+        });
 
     } catch (error) {
         return res.status(400).json({
