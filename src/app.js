@@ -16,23 +16,11 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 app.use(morgan("tiny"))
+app.use(bodyParser.json());
 
-app.use("/api",routerOrders)
-app.use("/api",routerProduct)
+// app.use("/api",routerOrders)
 
-// mongoose.connect("mongodb://127.0.0.1:27017/datn");
-mongoose.connect("mongodb://127.0.0.1:27017/datn").then(() =>{
-        console.log('connect Db success!!');
-    });
-
-const port = process.env.PORT || 8000;
-
-app.get("/",(req,res) =>{
-    res.send("Hello World")
-})
-
-//Kết nối cơ sở dữ liệu với mongoose alat
-mongoose.connect(`mongodb+srv://truonghvph16694:${process.env.MONGO_DB}@cluster0.eux1ygq.mongodb.net/`)
+mongoose.connect("mongodb://127.0.0.1:27017/datn")
 .then(() =>{
     console.log('connect Db success!!');
 })
@@ -40,9 +28,26 @@ mongoose.connect(`mongodb+srv://truonghvph16694:${process.env.MONGO_DB}@cluster0
     console.log('Error', err)
 })
 
+const port = process.env.PORT || 8000;
+
+app.get("/",(req,res) =>{
+    res.send("Hello World")
+})
+
+// //Kết nối cơ sở dữ liệu với mongoose alat
+// mongoose.connect(`mongodb+srv://truonghvph16694:${process.env.MONGO_DB}@cluster0.eux1ygq.mongodb.net/`)
+// .then(() =>{
+//     console.log('connect Db success!!');
+// })
+// .catch((err) =>{
+//     console.log('Error', err)
+// })
+
 //Router
 app.use("/api",categoryRouter);
 app.use("/api", productRouter);
+app.use("/api",categoryRouter)
+app.use("/api",routerOrders)
 
 
 app.listen(port , () =>{
