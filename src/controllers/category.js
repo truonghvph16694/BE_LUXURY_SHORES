@@ -41,7 +41,7 @@ export const get = async function (req, res) {
 export const create = async function (req, res) {
     try {
         const body = req.body;
-        console.log(body);
+        // console.log(body);
         const { error } = categorySchema.validate(body);
         
         if (error) {
