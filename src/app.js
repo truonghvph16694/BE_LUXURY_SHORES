@@ -4,9 +4,6 @@ import bodyParser from 'body-parser';
 import cors from "cors";
 import mongoose from 'mongoose';
 import categoryRouter from './routes/category'
-import productRouter from "./routes/product";
-import routerOrders from './routers/routers';
-
 import routerOrders from './routers/orders';
 import routerProduct from './routers/product';
 import morgan from 'morgan';
@@ -42,7 +39,6 @@ mongoose.connect(`mongodb+srv://truonghvph16694:${process.env.MONGO_DB}@cluster0
 
 //Router
 app.use("/api",categoryRouter);
-app.use("/api", productRouter);
 
 
 app.listen(port , () =>{
