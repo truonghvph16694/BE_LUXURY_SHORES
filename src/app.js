@@ -5,10 +5,9 @@ import cors from "cors";
 import mongoose from 'mongoose';
 import categoryRouter from './routes/category'
 import productRouter from "./routes/product";
-import routerOrders from './routers/routers';
+import routerOrders from './routes/orders';
 
-import routerOrders from './routers/orders';
-import routerProduct from './routers/product';
+
 import morgan from 'morgan';
 
 dotenv.config()
@@ -18,7 +17,6 @@ app.use(cors());
 app.use(morgan("tiny"))
 app.use(bodyParser.json());
 
-// app.use("/api",routerOrders)
 
 mongoose.connect("mongodb://127.0.0.1:27017/datn")
 .then(() =>{
@@ -46,7 +44,6 @@ app.get("/",(req,res) =>{
 //Router
 app.use("/api",categoryRouter);
 app.use("/api", productRouter);
-app.use("/api",categoryRouter)
 app.use("/api",routerOrders)
 
 
