@@ -38,6 +38,40 @@ export const get = async function (req, res) {
         });
     }
 };
+export const readCategory = async (req, res) => {
+    try {
+        const id = req.params.id;
+        const category = await _Categories.findOne({ _id: id });
+        const product = await _Product
+            .find({ categories: category })
+            .select("-product")
+            .exec();
+        const series = await _ProductSeries
+            .find({
+                categories: category,
+            })
+            .select("-product-series")
+            .exec();
+        if (!category) {
+            return res.json({
+                errorCode: 404,
+                message: "Category is not valid",
+            });
+        }
+        return res.json({
+            successCode: 200,
+            data: category,
+            product,
+            series,
+        });
+    } catch (error) {
+        return res.json({
+            errorCode: 400,
+            message: "Can't find category",
+        });
+    }
+};
+
 export const create = async function (req, res) {
     try {
         const body = req.body;
