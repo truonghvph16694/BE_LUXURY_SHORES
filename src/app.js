@@ -5,6 +5,7 @@ import cors from "cors";
 import mongoose from 'mongoose';
 
 import routerOrders from './routers/orders';
+import routerProduct from './routers/product';
 import morgan from 'morgan';
 
 dotenv.config()
@@ -14,6 +15,7 @@ app.use(cors());
 app.use(morgan("tiny"))
 
 app.use("/api",routerOrders)
+app.use("/api",routerProduct)
 
 mongoose.connect("mongodb://127.0.0.1:27017/datn").then(() =>{
         console.log('connect Db success!!');

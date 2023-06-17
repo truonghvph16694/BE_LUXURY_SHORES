@@ -6,15 +6,15 @@ dotenv.config();
 
 
 const orderSchema = Joi.object({
-    user_id: Joi.number(),
-    fullname: Joi.string(),
-    email: Joi.string(),
-    phoneNumber: Joi.string(),
-    address: Joi.string(),
-    note: Joi.string(),
+    user_id: Joi.number().required(),
+    fullname: Joi.string().required(),
+    email: Joi.string().required(),
+    phoneNumber: Joi.string().required(),
+    address: Joi.string().required(),
+    note: Joi.string().required(),
     order_date: Joi.date(),
-    status: Joi.number(),
-    total_money: Joi.number()
+    status: Joi.number().required(),
+    total_money: Joi.number().required()
 });
 
 export const getAll = async (req, res) => {

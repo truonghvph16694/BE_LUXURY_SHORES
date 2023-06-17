@@ -5,23 +5,23 @@ const orderSchema = new mongoose.Schema(
     {
         user_id: {
             type: Number,
-            // required: true
+            required: true
         },
         fullname: {
             type: String,
-            // required: true
+            required: true
         },
         email: {
             type: String,
-            // required: true
+            required: true
         },
         phoneNumber: {
             type: String,
-            // required: true
+            required: true
         },
         address: {
             type: String,
-            // required: true
+            required: true
         },
         note: {
             type: String
@@ -32,11 +32,11 @@ const orderSchema = new mongoose.Schema(
         },
         status: {
             type: Number,
-            // required: true
+            required: true
         },
         total_money: {
             type: Number,
-            // required: true
+            required: true
         }
     },
     {
