@@ -11,6 +11,25 @@ const productSchema = new mongoose.Schema(
         price: {
             type: Number,
         },
+
+        discount: {
+            type: Number
+        },
+        thumbnail: {
+            type: Number
+        },
+        description: {
+            type: String
+        },
+        created_at: {
+            type: Date
+        },
+        updated_at: {
+            type: Date
+        },
+        deleted: {
+            type: String
+        },
         // categoryId: {
         //     type: mongoose.Types.ObjectId,
         //     ref: "category",
