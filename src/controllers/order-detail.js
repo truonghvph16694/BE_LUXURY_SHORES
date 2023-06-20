@@ -105,6 +105,11 @@ export const update = async function (req, res) {
 export const remove = async function (req, res) {
     try {
         const order = await orderDetail.findByIdAndDelete(req.params.id);
+        if (!order) {
+            return res.json({
+                message: "Sản phẩm không tồn tại",
+            });
+        }
         return res.json({
             message: "Xóa sản phẩm thành công",
             order,
