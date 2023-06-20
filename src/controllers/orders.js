@@ -72,7 +72,7 @@ export const create = async function (req, res) {
             });
         }
         const order = await Orders.create(req.body);
-        console.log(order);
+        // console.log(order);
         if (!order) {
             return res.json({
                 message: "Không thể thêm đơn hàng",

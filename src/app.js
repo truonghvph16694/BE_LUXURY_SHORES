@@ -10,6 +10,7 @@ import routerDetail from './routes/order-detail';
 
 
 import morgan from 'morgan';
+import routerBills from './routes/bills';
 
 dotenv.config()
 const app = express();
@@ -47,6 +48,7 @@ app.use("/api",categoryRouter);
 app.use("/api", productRouter);
 app.use("/api",routerOrders);
 app.use("/api",routerDetail)
+app.use("/api",routerBills)
 
 
 app.listen(port , () =>{
