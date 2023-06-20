@@ -6,6 +6,7 @@ import mongoose from 'mongoose';
 import categoryRouter from './routes/category'
 import productRouter from "./routes/product";
 import routerOrders from './routes/orders';
+import routerDetail from './routes/order-detail';
 
 
 import morgan from 'morgan';
@@ -18,13 +19,13 @@ app.use(morgan("tiny"))
 app.use(bodyParser.json());
 
 
-mongoose.connect("mongodb://127.0.0.1:27017/datn")
-.then(() =>{
-    console.log('connect Db success!!');
-})
-.catch((err) =>{
-    console.log('Error', err)
-})
+// mongoose.connect("mongodb://127.0.0.1:27017/datn")
+// .then(() =>{
+//     console.log('connect Db success!!');
+// })
+// .catch((err) =>{
+//     console.log('Error', err)
+// })
 
 const port = process.env.PORT || 8000;
 
@@ -33,18 +34,19 @@ app.get("/",(req,res) =>{
 })
 
 // //Kết nối cơ sở dữ liệu với mongoose alat
-// mongoose.connect(`mongodb+srv://truonghvph16694:${process.env.MONGO_DB}@cluster0.eux1ygq.mongodb.net/`)
-// .then(() =>{
-//     console.log('connect Db success!!');
-// })
-// .catch((err) =>{
-//     console.log('Error', err)
-// })
+mongoose.connect(`mongodb+srv://truonghvph16694:${process.env.MONGO_DB}@cluster0.eux1ygq.mongodb.net/`)
+.then(() =>{
+    console.log('connect Db success!!');
+})
+.catch((err) =>{
+    console.log('Error', err)
+})
 
 //Router
 app.use("/api",categoryRouter);
 app.use("/api", productRouter);
-app.use("/api",routerOrders)
+app.use("/api",routerOrders);
+app.use("/api",routerDetail)
 
 
 app.listen(port , () =>{
@@ -52,35 +54,3 @@ app.listen(port , () =>{
 })
 
 
-
-// Dưới connect db atlat
-
-// import express from 'express'
-// import dotenv from 'dotenv'
-// import mongoose from 'mongoose';
-// import routerOrders from './routers/routers';
-
-
-// dotenv.config()
-// const app = express();
-
-// const port = process.env.PORT || 8000;
-
-// app.get("/",(req,res) =>{
-//     res.send("Hello World")
-// })
-
-// app.use("/api",routerOrders)
-
-// //Kết nối cơ sở dữ liệu với mongoose alat
-// mongoose.connect(`mongodb+srv://truonghvph16694:${process.env.MONGO_DB}@cluster0.eux1ygq.mongodb.net/`)
-// .then(() =>{
-//     console.log('connect Db success!!');
-// })
-// .catch((err) =>{
-//     console.log('Error', err)
-// })
-
-// app.listen(port , () =>{
-//     console.log('Service is running on port', port);
-// })
