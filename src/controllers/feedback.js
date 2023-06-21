@@ -26,7 +26,21 @@ export const getAll = async (req, res) => {
     }
 };
 
-
+export const get = async function (req, res) {
+    try {
+        const feedback = await Feedback.findById(req.params.id)  //.populate("products");
+        if (!feedback) {
+            return res.json({
+                message: "Không có danh mục nào",
+            });
+        }
+        return res.json(feedback);
+    } catch (error) {
+        return res.status(400).json({
+            message: error.message,
+        });
+    }
+};
 export const create = async function (req, res) {
     try {
         const body = req.body;
