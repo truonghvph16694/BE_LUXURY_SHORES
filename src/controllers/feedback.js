@@ -31,7 +31,7 @@ export const get = async function (req, res) {
         const feedback = await Feedback.findById(req.params.id)  //.populate("products");
         if (!feedback) {
             return res.json({
-                message: "Không có danh mục nào",
+                message: "Không có feedback nào",
             });
         }
         return res.json(feedback);
@@ -68,6 +68,25 @@ export const create = async function (req, res) {
     } catch (error) {
         return res.status(400).json({
             message: error,
+        });
+    }
+};
+
+export const update = async function (req, res) {
+    try {
+        const feedback = await Feedback.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        if (!feedback) {
+            return res.json({
+                message: "Cập nhật Feedback không thành công",
+            });
+        }
+        return res.json({
+            message: "Cập nhật Feedback thành công",
+            feedback,
+        });
+    } catch (error) {
+        return res.status(400).json({
+            message: error.message,
         });
     }
 };
