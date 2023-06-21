@@ -7,7 +7,7 @@ import categoryRouter from './routes/category'
 import productRouter from "./routes/product";
 import routerOrders from './routes/orders';
 
-import userRouter from "./router/user"
+import userRouter from "./routes/user"
 
 import morgan from 'morgan';
 
@@ -61,7 +61,7 @@ app.get("/",(req,res) =>{
 app.use("/api",categoryRouter);
 app.use("/api", productRouter);
 app.use("/api",routerOrders)
-
+app.use("/api", userRouter)
 
 app.listen(port , () =>{
     console.log('Service is running on port', port);
