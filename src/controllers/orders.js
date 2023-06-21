@@ -61,7 +61,9 @@ export const get = async function (req, res) {
 
 export const create = async function (req, res) {
     try {
-        const { error } = orderSchema.validate(req.body);
+        const body = req.body;
+        console.log(body);
+        const { error } = orderSchema.validate(body);
         
         if (error) {
             return res.status(400).json({

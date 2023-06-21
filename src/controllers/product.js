@@ -7,14 +7,7 @@ import Category from "../models/category";
 dotenv.config();
 const productSchema = joi.object({
     name: joi.string().required(),
-    price: joi.number().required(),
     description: joi.string(),
-    categoryId: joi.string().required(),
-    discount: joi.number().required(),
-    thumbnail: joi.number().required(),
-    description: joi.string().required(),
-    created_at: joi.date().required(),
-    updated_at: joi.date().required(),
 
     // categoryId: joi.string().required(),
 });

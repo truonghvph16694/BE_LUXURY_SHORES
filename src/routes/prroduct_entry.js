@@ -3,10 +3,10 @@ import { create, getAll, get, remove, update } from "../controllers/product_entr
 
 const router = express.Router();
 
-router.get("/products", getAll);
-router.get("/products/:id", get);
-router.post("/products",create)
-router.patch("/products/:id", update);
-router.delete("/products/:id", remove);
+router.get("/products_entry", getAll);
+router.get("/products_entry/:id", get);
+router.post("/products_entry",create)
+router.patch("/products_entry/:id", update);
+router.delete("/products_entry/:id", remove);
 
 export default router;
