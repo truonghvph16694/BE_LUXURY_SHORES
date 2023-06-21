@@ -6,6 +6,7 @@ import mongoose from 'mongoose';
 import categoryRouter from './routes/category'
 import productRouter from "./routes/product";
 import routerOrders from './routes/orders';
+import feedbackRouter from './routes/feedback';
 
 
 import morgan from 'morgan';
@@ -18,22 +19,7 @@ app.use(morgan("tiny"))
 app.use(bodyParser.json());
 
 
-mongoose.connect("mongodb://127.0.0.1:27017/datn")
-.then(() =>{
-    console.log('connect Db success!!');
-})
-.catch((err) =>{
-    console.log('Error', err)
-})
-
-const port = process.env.PORT || 8000;
-
-app.get("/",(req,res) =>{
-    res.send("Hello World")
-})
-
-// //Kết nối cơ sở dữ liệu với mongoose alat
-// mongoose.connect(`mongodb+srv://truonghvph16694:${process.env.MONGO_DB}@cluster0.eux1ygq.mongodb.net/`)
+// mongoose.connect("mongodb://127.0.0.1:27017/datn")
 // .then(() =>{
 //     console.log('connect Db success!!');
 // })
@@ -41,10 +27,26 @@ app.get("/",(req,res) =>{
 //     console.log('Error', err)
 // })
 
+const port = process.env.PORT || 8000;
+
+app.get("/",(req,res) =>{
+    res.send("Hello World")
+})
+
+//Kết nối cơ sở dữ liệu với mongoose alat
+mongoose.connect(`mongodb+srv://truonghvph16694:${process.env.MONGO_DB}@cluster0.eux1ygq.mongodb.net/`)
+.then(() =>{
+    console.log('connect Db success!!');
+})
+.catch((err) =>{
+    console.log('Error', err)
+})
+
 //Router
 app.use("/api",categoryRouter);
 app.use("/api", productRouter);
-app.use("/api",routerOrders)
+app.use("/api",routerOrders);
+app.use("/api",feedbackRouter)
 
 
 app.listen(port , () =>{

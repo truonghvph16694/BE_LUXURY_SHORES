@@ -83,16 +83,16 @@ export const create = async function (req, res) {
                 message: error.details[0].message,
             });
         }
-        const order = await Category.create(req.body);
-        console.log(order);
-        if (!order) {
+        const category = await Category.create(req.body);
+        console.log(category);
+        if (!category) {
             return res.json({
                 message: "Không thêm được danh mục",
             });
         }
         return res.json({
             message: "Thêm danh mục thành công",
-            data: order,
+            data: category,
 
         });
 
