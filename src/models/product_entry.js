@@ -3,20 +3,25 @@ import mongoosePaginate from "mongoose-paginate-v2";
 
 const productSchema = new mongoose.Schema(
     {
-        name: {
-            type: String,
-            require: true,
-            minLength: 3,
+        product_id: {
+    
         },
-        description: {
+        size: {
+            type: Number
+        },
+        color: {
             type: String
         },
-        created_at: {
-            type: Date
+        price: {
+            type: String
         },
-        updated_at: {
-            type: Date
+        quantity: {
+            type: Number
         },
+        status: {
+            type: String
+        },
+
         // categoryId: {
         //     type: mongoose.Types.ObjectId,
         //     ref: "category",
