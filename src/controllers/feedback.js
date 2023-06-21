@@ -90,3 +90,16 @@ export const update = async function (req, res) {
         });
     }
 };
+export const remove = async function (req, res) {
+    try {
+        const feedback = await Feedback.findByIdAndDelete(req.params.id);
+        return res.json({
+            message: "Xóa feedback thành công",
+            feedback,
+        });
+    } catch (error) {
+        return res.status(400).json({
+            message: error.message,
+        });
+    }
+};
