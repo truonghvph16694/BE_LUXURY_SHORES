@@ -1,26 +1,32 @@
+import { boolean } from "joi";
 import mongoose from "mongoose";
 import mongoosePaginate from "mongoose-paginate-v2";
 
-const productSchema = new mongoose.Schema(
+const product_entrySchema = new mongoose.Schema(
     {
-        product_id: {
+        // product_id: {
     
-        },
+        // },
         size: {
-            type: Number
+            type: String,
+            require: true
         },
         color: {
-            type: String
+            type: String,
+            require: true
         },
         price: {
-            type: String
+            type: Number,
+            require: true
         },
         quantity: {
-            type: Number
+            type: Number,
+            require: true
         },
-        status: {
-            type: String
-        },
+        // status: {
+        //     type: boolean,
+        //     require: false
+        // },
 
         // categoryId: {
         //     type: mongoose.Types.ObjectId,
@@ -29,6 +35,6 @@ const productSchema = new mongoose.Schema(
     },
     { timestamps: true, versionKey: false }
 );
-productSchema.plugin(mongoosePaginate);
+product_entrySchema.plugin(mongoosePaginate);
 
-export default mongoose.model("Product_entry", productSchema);
+export default mongoose.model("Product_entry", product_entrySchema);

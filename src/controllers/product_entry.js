@@ -1,20 +1,21 @@
 import dotenv from "dotenv";
 import joi from "joi";
-import Product from "../models/product_entry";
+import Product_entry from "../models/product_entry";
 // import Category from "../models/category";
 // import Category from "../models/category";
 
 dotenv.config();
-const productSchema = joi.object({
-    size: joi.number().required(),
-    price: joi.string(),
+const product_entrySchema = joi.object({
+    size: joi.string().required(),
+    color: joi.string().required(),
+    price: joi.number(),
     quantity: joi.number(),
-    status: joi.string(),
+    // status: joi.boolean(),
     // categoryId: joi.string().required(),
 });
 
 export const getAll = async (req, res) => {
-    // const { _sort = "createAt", _order = "asc", _limit = 10, _page = 1 } = req.query;
+    const { _sort = "createAt", _order = "asc", _limit = 10, _page = 1 } = req.query;
     const options = {
         page: _page,
         limit: _limit,
@@ -23,7 +24,7 @@ export const getAll = async (req, res) => {
         },
     };
     try {
-        const products = await Product.paginate({}, options);
+        const products = await Product_entry.paginate({}, options);
         if (products.length === 0) {
             return res.json({
                 message: "Không có sản phẩm nào",
@@ -36,24 +37,10 @@ export const getAll = async (req, res) => {
         });
     }
 };
-// export const get = async function (req, res) {
-//     try {
-//         const product = await Product.findById(req.params.id).populate("categoryId");
-//         if (!product) {
-//             return res.json({
-//                 message: "Không có sản phẩm nào",
-//             });
-//         }
-//         return res.json(product);
-//     } catch (error) {
-//         return res.status(400).json({
-//             message: error,
-//         });
-//     }
-// };
+
 export const get = async function (req, res) {
     try {
-        const product = await Product.findById(req.params.id)
+        const product = await Product_entry.findById(req.params.id)
         if (!product) {
             return res.json({
                 message: "Không có sản phẩm nào",
@@ -68,13 +55,13 @@ export const get = async function (req, res) {
 };
 export const create = async function (req, res) {
     try {
-        const { error } = productSchema.validate(req.body);
+        const { error } = product_entrySchema.validate(req.body);
         if (error) {
             return res.status(400).json({
                 message: error.details[0].message,
             });
         }
-        const product = await Product.create(req.body);
+        const product = await Product_entry.create(req.body);
         if (!product) {
             return res.json({
                 message: "Không thêm sản phẩm",
@@ -85,7 +72,7 @@ export const create = async function (req, res) {
         //         products: product._id,
         //     },
         // });
-        
+
         return res.json({
             message: "Thêm sản phẩm thành công",
             data: product,
@@ -98,7 +85,7 @@ export const create = async function (req, res) {
 };
 export const update = async function (req, res) {
     try {
-        const product = await Product.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        const product = await Product_entry.findByIdAndUpdate(req.params.id, req.body, { new: true });
         if (!product) {
             return res.json({
                 message: "Cập nhật sản phẩm không thành công",
@@ -117,7 +104,7 @@ export const update = async function (req, res) {
 
 export const remove = async function (req, res) {
     try {
-        const product = await Product.findByIdAndDelete(req.params.id);
+        const product = await Product_entry.findByIdAndDelete(req.params.id);
         return res.json({
             message: "Xóa sản phẩm thành công",
             product,
