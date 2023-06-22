@@ -8,6 +8,8 @@ import routerOrders from './routes/orders';
 import productRouter from './routes/product';
 import productentryRouter from './routes/prroduct_entry';
 import productsize from './routes/product_size';
+import productcolor from './routes/product_color';
+
 
 import morgan from 'morgan';
 
@@ -50,6 +52,8 @@ app.use("/api", productRouter);
 app.use("/api",routerOrders);
 app.use("/api",productentryRouter);
 app.use("/api",productsize);
+app.use("/api",productcolor);
+
 
 
 
