@@ -6,9 +6,7 @@ import Product_color from "../models/product_color";
 
 dotenv.config();
 const product_colorSchema = joi.object({
-    size: joi.string().required(),
-    color: joi.string().required(),
-    // status: joi.boolean(),
+    value: joi.string().required(),
     // categoryId: joi.string().required(),
 });
 

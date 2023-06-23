@@ -4,14 +4,10 @@ import mongoosePaginate from "mongoose-paginate-v2";
 
 const product_sizeSchema = new mongoose.Schema(
     {
-        // product_id: {
+        // id: {
     
         // },
-        size: {
-            type: String,
-            require: true
-        },
-        color: {
+        value: {
             type: String,
             require: true
         },

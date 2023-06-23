@@ -6,9 +6,7 @@ import Product_size from "../models/product_size";
 
 dotenv.config();
 const product_sizeSchema = joi.object({
-    size: joi.string().required(),
-    color: joi.string().required(),
-    // status: joi.boolean(),
+    value: joi.string().required(),
     // categoryId: joi.string().required(),
 });
 
