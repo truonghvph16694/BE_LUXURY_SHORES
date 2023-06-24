@@ -11,6 +11,7 @@ import routerDetail from './routes/order-detail';
 
 import morgan from 'morgan';
 import routerBills from './routes/bills';
+import routerImage from './routes/product_image';
 
 dotenv.config()
 const app = express();
@@ -49,6 +50,7 @@ app.use("/api", productRouter);
 app.use("/api",routerOrders);
 app.use("/api",routerDetail)
 app.use("/api",routerBills)
+app.use("/api", routerImage)
 
 
 app.listen(port , () =>{
