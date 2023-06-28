@@ -6,7 +6,9 @@ const orderSchema = new mongoose.Schema(
     {
         user_id: {
             type: Number,
-            required: true
+            // type: mongoose.Types.ObjectId,
+            required: true,
+            // ref: "User"
         },
         province_id:{
             type: String,
@@ -21,10 +23,6 @@ const orderSchema = new mongoose.Schema(
             reuired: true
         },
         detail_address:{
-            type: String,
-            required: true
-        },
-        fullname: {
             type: String,
             required: true
         },

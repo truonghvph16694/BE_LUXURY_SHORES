@@ -32,7 +32,7 @@ const productSchema = new mongoose.Schema(
         },
         // categoryId: {
         //     type: mongoose.Types.ObjectId,
-        //     ref: "category",
+        //     ref: "Category",
         // },
     },
     { timestamps: true, versionKey: false }
