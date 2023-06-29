@@ -10,7 +10,7 @@ const product_entrySchema = joi.object({
     color: joi.string().required(),
     price: joi.number(),
     quantity: joi.number(),
-    // status: joi.boolean(),
+
     // categoryId: joi.string().required(),
 });
 

@@ -17,10 +17,10 @@ const productSchema = new mongoose.Schema(
         updated_at: {
             type: Date
         },
-        // categoryId: {
-        //     type: mongoose.Types.ObjectId,
-        //     ref: "category",
-        // },
+        categoryId: {
+            type: mongoose.Types.ObjectId,
+            ref: "Category",
+        },
     },
     { timestamps: true, versionKey: false }
 );

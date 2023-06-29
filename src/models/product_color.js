@@ -4,19 +4,10 @@ import mongoosePaginate from "mongoose-paginate-v2";
 
 const product_colorSchema = new mongoose.Schema(
     {
-        //id: {
-    
-        // },
         value: {
             type: String,
             require: true
         },
-
-
-        // categoryId: {
-        //     type: mongoose.Types.ObjectId,
-        //     ref: "category",
-        // },
     },
     { timestamps: true, versionKey: false }
 );

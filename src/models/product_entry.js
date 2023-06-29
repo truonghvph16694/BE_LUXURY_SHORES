@@ -4,16 +4,13 @@ import mongoosePaginate from "mongoose-paginate-v2";
 
 const product_entrySchema = new mongoose.Schema(
     {
-        // product_id: {
-    
-        // },
-        size: {
-            type: String,
-            require: true
+        sizeId: {
+            type: mongoose.Types.ObjectId,
+            ref: "Product_size",
         },
-        color: {
-            type: String,
-            require: true
+        colorId: {
+            type: mongoose.Types.ObjectId,
+            ref: "Product_color",
         },
         price: {
             type: Number,
@@ -25,13 +22,12 @@ const product_entrySchema = new mongoose.Schema(
         },
         // status: {
         //     type: boolean,
-        //     require: false
+        //     require: true
         // },
-
-        // categoryId: {
-        //     type: mongoose.Types.ObjectId,
-        //     ref: "category",
-        // },
+        productId: {
+            type: mongoose.Types.ObjectId,
+            ref: "Product",
+        },
     },
     { timestamps: true, versionKey: false }
 );
