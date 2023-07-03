@@ -8,6 +8,7 @@ import productRouter from "./routes/product";
 import routerOrders from './routes/orders';
 import feedbackRouter from './routes/feedback';
 
+import userRouter from "./routes/user"
 
 import morgan from 'morgan';
 
@@ -48,6 +49,7 @@ app.use("/api", productRouter);
 app.use("/api",routerOrders);
 app.use("/api",feedbackRouter)
 
+app.use("/api", userRouter)
 
 app.listen(port , () =>{
     console.log('Service is running on port', port);
