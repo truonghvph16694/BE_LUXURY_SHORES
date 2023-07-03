@@ -5,10 +5,10 @@ import mongoosePaginate from "mongoose-paginate-v2";
 const billSchema = new mongoose.Schema(
     {
         user_id:{
-            // type: mongoose.Types.ObjectId,
-            type: Number,
+            type: mongoose.Types.ObjectId,
+            // type: Number,
             required: true,
-            // ref: ""
+            ref: "User"
         },
         code:{
             type: Number,  
@@ -23,10 +23,10 @@ const billSchema = new mongoose.Schema(
              required: true
         },
         order_id:{
-            type: Number,
-            // type: mongoose.Types.ObjectId,
-            required: true
-            // ref: ""
+            // type: Number,
+            type: mongoose.Types.ObjectId,
+            required: true,
+            ref: "Orders"
         }
     },
     {

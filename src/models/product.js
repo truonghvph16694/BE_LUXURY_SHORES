@@ -11,12 +11,12 @@ const productSchema = new mongoose.Schema(
         description: {
             type: String
         },
-        created_at: {
-            type: Date
-        },
-        updated_at: {
-            type: Date
-        },
+        // created_at: {
+        //     type: Date
+        // },
+        // updated_at: {
+        //     type: Date
+        // },
         categoryId: {
             type: mongoose.Types.ObjectId,
             ref: "Category",

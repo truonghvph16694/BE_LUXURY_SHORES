@@ -5,16 +5,16 @@ import mongoosePaginate from "mongoose-paginate-v2";
 const order_detail_Schema = new mongoose.Schema(
     {
         product_entry_id:{
-            // type: mongoose.Types.ObjectId,
-            type: Number,
+            type: mongoose.Types.ObjectId,
+            // type: Number,
             required: true,
-            // ref: "Product_Entry"
+            ref: "Product_Entry"
         },
         order_id:{
-            // type: mongoose.Types.ObjectId,
-            type: Number,
+            type: mongoose.Types.ObjectId,
+            // type: Number,
             required: true,
-            // ref: "Orders"
+            ref: "Orders"
         },
         price:{
             type: Number,

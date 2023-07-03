@@ -5,10 +5,10 @@ import mongoosePaginate from "mongoose-paginate-v2";
 const orderSchema = new mongoose.Schema(
     {
         user_id: {
-            type: Number,
-            // type: mongoose.Types.ObjectId,
+            // type: Number,
+            type: mongoose.Types.ObjectId,
             required: true,
-            // ref: "User"
+            ref: "User"
         },
         province_id:{
             type: String,

@@ -7,9 +7,8 @@ import Category from "../models/category";
 dotenv.config();
 const productSchema = joi.object({
     name: joi.string().required(),
-    description: joi.string(),
-
-    // categoryId: joi.string().required(),
+    description: joi.string().required(),
+    categoryId: joi.string().required(),
 });
 
 export const getAll = async (req, res) => {
