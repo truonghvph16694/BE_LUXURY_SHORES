@@ -1,23 +1,15 @@
 import dotenv from 'dotenv';
 import Joi from 'joi';
-import Orders from '../models/orders';
+import orderDetail from '../models/order-detail';
 
 dotenv.config();
 
 
-const orderSchema = Joi.object({
-    user_id: Joi.number().required(),
-    province_id: Joi.string().required(),
-    district_id: Joi.string().required(),
-    ward_id: Joi.string().required(),
-    detail_address: Joi.string().required(),
-    fullname: Joi.string().required(),
-    note: Joi.string().required(),
-    ships: Joi.number(),
-    status: Joi.number().required(),
-    finish_date: Joi.date(),
-    create_at: Joi.date(),
-    total_price: Joi.number().required()
+const order_detail_Schema = Joi.object({
+    product_entry_id: Joi.number().required(),
+    order_id: Joi.number().required(),
+    price: Joi.number().required(),
+    quantity: Joi.number().required()
 });
 
 export const getAll = async (req, res) => {
@@ -30,13 +22,13 @@ export const getAll = async (req, res) => {
         }, 
     };
     try {
-        const orders = await Orders.paginate({}, options);
-        if (orders.length === 0) {
+        const order = await orderDetail.paginate({}, options);
+        if (order.length === 0) {
             return res.json({
-                message: "Không có đơn đặt hàng nào",
+                message: "Không có sản phẩm nào",
             });
         }
-        return res.json(orders);
+        return res.json(order);
     } catch (error) {
         return res.status(400).json({
             message: error,
@@ -47,10 +39,10 @@ export const getAll = async (req, res) => {
 
 export const get = async function (req, res) {
     try {
-        const order = await Orders.findById(req.params.id)
+        const order = await orderDetail.findById(req.params.id)
         if (!order) {
             return res.json({
-                message: "Không có đơn đặt hàng nào",
+                message: "Không có sản phẩm nào",
             });
         }
         return res.json(order);
@@ -64,22 +56,22 @@ export const get = async function (req, res) {
 
 export const create = async function (req, res) {
     try {
-        const { error } = orderSchema.validate(req.body);
+        const { error } = order_detail_Schema.validate(req.body);
         
         if (error) {
             return res.status(400).json({
                 message: error.details[0].message,
             });
         }
-        const order = await Orders.create(req.body);
+        const order = await orderDetail.create(req.body);
         // console.log(order);
         if (!order) {
             return res.json({
-                message: "Không thể thêm đơn hàng",
+                message: "Không thể thêm sản phẩm",
             });
         }
         return res.json({
-            message: "Thêm đơn hàng thành công",
+            message: "Thêm sản phẩm thành công",
             data: order,
 
         });
@@ -93,14 +85,14 @@ export const create = async function (req, res) {
 
 export const update = async function (req, res) {
     try {
-        const order = await Orders.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        const order = await orderDetail.findByIdAndUpdate(req.params.id, req.body, { new: true });
         if (!order) {
             return res.json({
-                message: "Cập nhật đơn hàng không thành công",
+                message: "Cập nhật sản phẩm không thành công",
             });
         }
         return res.json({
-            message: "Cập nhật đơn hàng thành công",
+            message: "Cập nhật sản phẩm thành công",
             data: order,
         });
     } catch (error) {
@@ -110,3 +102,21 @@ export const update = async function (req, res) {
     }
 };
 
+export const remove = async function (req, res) {
+    try {
+        const order = await orderDetail.findByIdAndDelete(req.params.id);
+        if (!order) {
+            return res.json({
+                message: "Sản phẩm không tồn tại",
+            });
+        }
+        return res.json({
+            message: "Xóa sản phẩm thành công",
+            order,
+        });
+    } catch (error) {
+        return res.status(400).json({
+            message: error.message,
+        });
+    }
+};

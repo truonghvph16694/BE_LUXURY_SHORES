@@ -7,10 +7,14 @@ import categoryRouter from './routes/category'
 import productRouter from "./routes/product";
 import routerOrders from './routes/orders';
 import feedbackRouter from './routes/feedback';
+import routerDetail from './routes/order-detail';
 
 import userRouter from "./routes/user"
 
 import morgan from 'morgan';
+import routerBills from './routes/bills';
+import routerImage from './routes/product_image';
+import routerProductCate from './routes/product_category';
 
 dotenv.config()
 const app = express();
@@ -34,7 +38,7 @@ app.get("/",(req,res) =>{
     res.send("Hello World")
 })
 
-//Kết nối cơ sở dữ liệu với mongoose alat
+// //Kết nối cơ sở dữ liệu với mongoose alat
 mongoose.connect(`mongodb+srv://truonghvph16694:${process.env.MONGO_DB}@cluster0.eux1ygq.mongodb.net/`)
 .then(() =>{
     console.log('connect Db success!!');
@@ -48,9 +52,15 @@ app.use("/api",categoryRouter);
 app.use("/api", productRouter);
 app.use("/api",routerOrders);
 app.use("/api",feedbackRouter)
+app.use("/api",routerDetail)
+app.use("/api",routerBills)
+app.use("/api", routerImage)
+app.use("/api", routerProductCate)
 
 app.use("/api", userRouter)
 
 app.listen(port , () =>{
     console.log('Service is running on port', port);
 })
+
+

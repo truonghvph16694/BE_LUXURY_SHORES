@@ -1,3 +1,4 @@
+
 import mongoose from "mongoose";
 import mongoosePaginate from "mongoose-paginate-v2";
 
@@ -5,38 +6,56 @@ const orderSchema = new mongoose.Schema(
     {
         user_id: {
             type: Number,
-            // required: true
+            // type: mongoose.Types.ObjectId,
+            required: true,
+            // ref: "User"
         },
-        fullname: {
+        province_id:{
             type: String,
-            // required: true
+            required: true
         },
-        email: {
+        district_id: {
             type: String,
-            // required: true
+            required: true
         },
-        phoneNumber: {
+        ward_id: {
             type: String,
-            // required: true
+            reuired: true
         },
-        address: {
+        detail_address:{
             type: String,
-            // required: true
+            required: true
         },
         note: {
             type: String
         },
-        order_date: {
-            type: Date,
-            default: Date.now
-        },
         status: {
             type: Number,
-            // required: true
+            required: true
         },
-        total_money: {
+        ships:{
             type: Number,
-            // required: true
+            required: true,
+            default: 20000
+        },
+        created_at:{
+            type: Date,
+            requred: true,
+            default: Date.now
+        },
+        finish_date:{
+            type: Date,
+            required: true,
+            default: Date.now
+        },
+        total_price: {
+            type: Number,
+            required: true
+        },
+        payment:{
+            type: Number,
+            reuired: true,
+            default: 0
         }
     },
     {
