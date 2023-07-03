@@ -4,10 +4,13 @@ import bodyParser from 'body-parser';
 import cors from "cors";
 import mongoose from 'mongoose';
 import categoryRouter from './routes/category'
-import productRouter from "./routes/product";
 import routerOrders from './routes/orders';
 import feedbackRouter from './routes/feedback';
 import routerDetail from './routes/order-detail';
+import productRouter from './routes/product';
+import productentryRouter from './routes/prroduct_entry';
+import productsize from './routes/product_size';
+import productcolor from './routes/product_color';
 
 import userRouter from "./routes/user"
 
@@ -32,6 +35,8 @@ app.use(bodyParser.json());
 //     console.log('Error', err)
 // })
 
+//Router
+app.use("/api",categoryRouter);
 const port = process.env.PORT || 8000;
 
 app.get("/",(req,res) =>{
@@ -56,6 +61,11 @@ app.use("/api",routerDetail)
 app.use("/api",routerBills)
 app.use("/api", routerImage)
 app.use("/api", routerProductCate)
+app.use("/api",productentryRouter);
+app.use("/api",productsize);
+app.use("/api",productcolor);
+
+
 
 app.use("/api", userRouter)
 

@@ -8,16 +8,6 @@ const productSchema = new mongoose.Schema(
             require: true,
             minLength: 3,
         },
-        price: {
-            type: Number,
-        },
-
-        discount: {
-            type: Number
-        },
-        thumbnail: {
-            type: Number
-        },
         description: {
             type: String
         },
@@ -27,13 +17,10 @@ const productSchema = new mongoose.Schema(
         updated_at: {
             type: Date
         },
-        deleted: {
-            type: String
+        categoryId: {
+            type: mongoose.Types.ObjectId,
+            ref: "Category",
         },
-        // categoryId: {
-        //     type: mongoose.Types.ObjectId,
-        //     ref: "Category",
-        // },
     },
     { timestamps: true, versionKey: false }
 );
