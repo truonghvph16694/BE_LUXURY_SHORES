@@ -85,6 +85,24 @@ export const update = async function (req, res) {
         });
     }
 };
+export const editStatus = async function (req, res) {
+    try {
+        const user = await User.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        if (!user) {
+            return res.json({
+                message: "Cập nhật status không thành công",
+            });
+        }
+        return res.json({
+            message: "Cập nhật status thành công",
+            data: user,
+        });
+    } catch (error) {
+        return res.status(400).json({
+            message: error,
+        });
+    }
+};
 export const remove = async function (req, res) {
     try {
         const user = await User.findOneAndDelete(req.params.id);
