@@ -2,32 +2,33 @@ import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema(
     {
-        fullName: {
+        fullname: {
             type: String,
+            require:true
         },
         email: {
             type: String,
-            required: true,
+            unique: true,
+            require: true,
         },
         password: {
             type: String,
+            require: true,
+            minlength: 6,
         },
         phone: {
-            type: Number, 
+            type: String, 
             required: true
         }
         ,
-        role: {
+        type: {
             type: String,
-            default: "admin",
-        },
-        gender: {
-            type: String,
-            default: "male",
+            enum: ["admin", "member"],
+            default: "member",
         },
         status: {
-            type: String,
-
+            type: Boolean,
+            default: true
         }
     },
     { timestamps: true, versionKey: false }

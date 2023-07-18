@@ -80,7 +80,7 @@ export const create = async function (req, res) {
         
         if (error) {
             return res.status(400).json({
-                message: error.details[0].message,
+                message: error.details[0].message,  
             });
         }
         const category = await Category.create(req.body);
