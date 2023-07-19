@@ -1,12 +1,13 @@
 import express from "express";
 import { create, update, get, getAll, remove } from "../controllers/product_category";
+import authenticate from "../middlewares/authenticate";
 
 const router = express.Router();
 
 router.get("/product-category", getAll);
 router.get("/product-category/:id", get);
-router.post("/product-category", create);
-router.patch("/product-category/:id", update);
-router.delete("/product-category/:id", remove);
+router.post("/product-category", authenticate, create);
+router.patch("/product-category/:id", authenticate, update);
+router.delete("/product-category/:id", authenticate, remove);
 
 export default router;

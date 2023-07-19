@@ -13,6 +13,7 @@ import morgan from 'morgan';
 import routerBills from './routes/bills';
 import routerImage from './routes/product_image';
 import routerProductCate from './routes/product_category';
+import routerUser from './routes/user';
 
 dotenv.config()
 const app = express();
@@ -53,6 +54,7 @@ app.use("/api",routerDetail)
 app.use("/api",routerBills)
 app.use("/api", routerImage)
 app.use("/api", routerProductCate)
+app.use("/auth", routerUser)
 
 
 app.listen(port , () =>{
