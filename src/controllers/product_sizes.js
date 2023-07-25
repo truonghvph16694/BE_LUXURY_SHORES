@@ -20,7 +20,7 @@ export const getAll = async (req, res) => {
         },
     };
     try {
-        const products = await product_sizeSchema.paginate({}, options);
+        const products = await Product_size.paginate({}, options);
         if (products.length === 0) {
             return res.json({
                 message: "Không có sản phẩm nào",
