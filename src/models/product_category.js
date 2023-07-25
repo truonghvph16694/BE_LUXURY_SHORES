@@ -5,16 +5,12 @@ import mongoosePaginate from "mongoose-paginate-v2";
 const product_category_Schema = new mongoose.Schema(
     {
         product_id:{
-            // type: mongoose.Types.ObjectId
-            type: Number,
-             required: true
-            //  ref: "products"
+            type: mongoose.Types.ObjectId,
+             ref: "products"
         },
         category_id:{
-            // type: mongoose.Types.ObjectId
-            type: Number,
-            required: true,
-            // ref: "category"
+            type: mongoose.Types.ObjectId,
+            ref: "category"
         }
     },
     {

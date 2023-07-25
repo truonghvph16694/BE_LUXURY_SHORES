@@ -14,6 +14,7 @@ import routerBills from './routes/bills';
 import routerImage from './routes/product_image';
 import routerProductCate from './routes/product_category';
 import routerUser from './routes/user';
+import routerUploadImage from './routes/upload';
 
 dotenv.config()
 const app = express();
@@ -55,6 +56,7 @@ app.use("/api",routerBills)
 app.use("/api", routerImage)
 app.use("/api", routerProductCate)
 app.use("/auth", routerUser)
+app.use("/api", routerUploadImage)
 
 
 app.listen(port , () =>{

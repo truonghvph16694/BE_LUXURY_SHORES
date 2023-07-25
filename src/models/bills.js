@@ -5,10 +5,8 @@ import mongoosePaginate from "mongoose-paginate-v2";
 const billSchema = new mongoose.Schema(
     {
         user_id:{
-            // type: mongoose.Types.ObjectId,
-            type: Number,
-            required: true,
-            // ref: ""
+            type: mongoose.Types.ObjectId,
+            ref: "User"
         },
         code:{
             type: Number,  

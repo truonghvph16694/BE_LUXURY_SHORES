@@ -30,10 +30,10 @@ const productSchema = new mongoose.Schema(
         deleted: {
             type: String
         },
-        // categoryId: {
-        //     type: mongoose.Types.ObjectId,
-        //     ref: "Category",
-        // },
+        categoryId: {
+            type: mongoose.Types.ObjectId,
+            ref: "Category",
+        },
     },
     { timestamps: true, versionKey: false }
 );

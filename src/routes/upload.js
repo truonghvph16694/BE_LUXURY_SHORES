@@ -1,21 +1,21 @@
-// import express from "express";
-// import multer from "multer";
-// import { CloudinaryStorage } from "multer-storage-cloudinary";
-// import { deleteImage, uploadImage } from "../controllers/upload";
-// import cloudinary from "../config/cloudinaryConfig";
-// const router = express.Router();
+import express from "express";
+import multer from "multer";
+import { CloudinaryStorage } from "multer-storage-cloudinary";
+import { deleteImage, uploadImage } from "../controllers/upload";
+import cloudinary from "../config/cloudinaryConfig";
+const router = express.Router();
 
-// const storage = new CloudinaryStorage({
-//     cloudinary: cloudinary,
-//     params: {
-//         folder: "WE17301",
-//         format: "png",
-//     },
-// });
+const storage = new CloudinaryStorage({
+    cloudinary: cloudinary,
+    params: {
+        folder: "images",
+        format: "png",
+    },
+});
 
-// const upload = multer({ storage: storage });
+const upload = multer({ storage: storage });
 
-// router.post("/images/upload", upload.array("images", 10), uploadImage);
-// router.delete("/images/:publicId", deleteImage);
+router.post("/images/upload", upload.array("images", 10), uploadImage);
+router.delete("/images/:publicId", deleteImage);
 
-// export default router;
+export default router;

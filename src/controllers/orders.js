@@ -30,7 +30,16 @@ export const getAll = async (req, res) => {
         }, 
     };
     try {
-        const orders = await Orders.paginate({}, options);
+        const orders = await Orders.aggregate([
+            {
+                $lookup: {
+                    from: 'users',
+                    localField: '_id',
+                    foreignField: 'user_id',
+                    as: 'users',
+                },
+            },
+        ]);
         if (orders.length === 0) {
             return res.json({
                 message: "Không có đơn đặt hàng nào",
