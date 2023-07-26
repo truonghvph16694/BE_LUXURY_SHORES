@@ -13,6 +13,7 @@ import productsize from './routes/product_size';
 import productcolor from './routes/product_color';
 
 import userRouter from "./routes/user"
+import routerUpload from "./routes/upload"
 
 import morgan from 'morgan';
 import routerBills from './routes/bills';
@@ -64,6 +65,7 @@ app.use("/api", routerProductCate)
 app.use("/api",productentryRouter);
 app.use("/api",productsize);
 app.use("/api",productcolor);
+app.use("/api",routerUpload)    ;
 
 
 
