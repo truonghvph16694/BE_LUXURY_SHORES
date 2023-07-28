@@ -41,11 +41,6 @@ const orderSchema = new mongoose.Schema(
             requred: true,
             default: Date.now
         },
-        finish_date:{
-            type: Date,
-            required: true,
-            default: Date.now
-        },
         total_price: {
             type: Number,
             required: true

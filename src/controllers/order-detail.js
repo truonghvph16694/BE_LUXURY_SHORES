@@ -22,7 +22,22 @@ export const getAll = async (req, res) => {
         }, 
     };
     try {
-        const order = await orderDetail.paginate({}, options);
+        const order = await orderDetail.aggregate([
+            {
+                $lookup: {
+                    from: 'product_entries',
+                    localField: 'product_entry_id',
+                    foreignField: '_id',
+                    as: 'product_entry',
+                },
+            }, {
+                $unwind: {
+                    path: '$user',
+                    preserveNullAndEmptyArrays:true
+                },
+            },
+            
+        ]);
         if (order.length === 0) {
             return res.json({
                 message: "Không có sản phẩm nào",

@@ -21,10 +21,8 @@ const billSchema = new mongoose.Schema(
              required: true
         },
         order_id:{
-            type: Number,
-            // type: mongoose.Types.ObjectId,
-            required: true
-            // ref: ""
+            type: mongoose.Types.ObjectId,
+            ref: "orders"
         }
     },
     {

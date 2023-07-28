@@ -34,11 +34,17 @@ export const getAll = async (req, res) => {
             {
                 $lookup: {
                     from: 'users',
-                    localField: '_id',
-                    foreignField: 'user_id',
-                    as: 'users',
+                    localField: 'user_id',
+                    foreignField: '_id',
+                    as: 'user',
+                },
+            }, {
+                $unwind: {
+                    path: '$user',
+                    preserveNullAndEmptyArrays:true
                 },
             },
+            
         ]);
         if (orders.length === 0) {
             return res.json({
