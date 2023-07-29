@@ -2,6 +2,7 @@ import dotenv from "dotenv";
 import joi from "joi";
 import Product from "../models/product";
 import Category from "../models/category";
+import product_entry from "../models/product_entry";
 // import Category from "../models/category";
 
 dotenv.config();
@@ -21,7 +22,17 @@ export const getAll = async (req, res) => {
         },
     };
     try {
-        const products = await Product.paginate({}, options);
+        const products = await Product.aggregate([
+            {
+                $lookup: {
+                    from: 'product_entries',
+                    localField: '_id',
+                    foreignField: 'productId',
+                    as: 'product_entries',
+                },
+            },
+        ]);
+        console.log(products)
         if (products.length === 0) {
             return res.json({
                 message: "Không có sản phẩm nào",
@@ -66,13 +77,18 @@ export const get = async function (req, res) {
 };
 export const create = async function (req, res) {
     try {
-        const { error } = productSchema.validate(req.body);
-        if (error) {
-            return res.status(400).json({
-                message: error.details[0].message,
-            });
-        }
-        const product = await Product.create(req.body);
+        // const { error } = productSchema.validate(req.body);
+        // if (error) {
+        //     return res.status(400).json({
+        //         message: error.details[0].message,
+        //     });
+        // }
+        const data = req.body;
+        const product = await Product.create({ name: data.name, description: data.description, categoryId: data.categoryId });
+        // them nhieu product_entry
+        data.product_entrys.map((item) => {
+            product_entry.create({ productId: product._id, colorId: item.colorId, sizeId: item.sizeId, price: item.price, quantity: item.quantity });
+        });
         if (!product) {
             return res.json({
                 message: "Không thêm sản phẩm",
@@ -83,7 +99,7 @@ export const create = async function (req, res) {
                 products: product._id,
             },
         });
-        
+
         return res.json({
             message: "Thêm sản phẩm thành công",
             data: product,

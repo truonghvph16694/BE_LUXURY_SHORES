@@ -3,10 +3,10 @@ import mongoosePaginate from "mongoose-paginate-v2";
 
 const feedbackSchema = new mongoose.Schema(
     {
-        // Order_detail_id:{
-        //     type: Number,
-        //     require: true,
-        // }
+        Order_detail_id:{
+            type: Number,
+            require: true,
+        },
         title: {
             type: String,
             require: true,

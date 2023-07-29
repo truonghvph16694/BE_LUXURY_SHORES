@@ -9,4 +9,4 @@ router.post("/products",create)
 router.patch("/products/:id", update);
 router.delete("/products/:id", remove);
 
-export default router;
+export default router;      
