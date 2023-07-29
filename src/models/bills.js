@@ -6,8 +6,6 @@ const billSchema = new mongoose.Schema(
     {
         user_id:{
             type: mongoose.Types.ObjectId,
-            // type: Number,
-            required: true,
             ref: "User"
         },
         code:{
@@ -23,10 +21,8 @@ const billSchema = new mongoose.Schema(
              required: true
         },
         order_id:{
-            // type: Number,
             type: mongoose.Types.ObjectId,
-            required: true,
-            ref: "Orders"
+            ref: "orders"
         }
     },
     {

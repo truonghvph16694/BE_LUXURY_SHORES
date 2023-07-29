@@ -5,9 +5,7 @@ import mongoosePaginate from "mongoose-paginate-v2";
 const orderSchema = new mongoose.Schema(
     {
         user_id: {
-            // type: Number,
             type: mongoose.Types.ObjectId,
-            required: true,
             ref: "User"
         },
         province_id:{
@@ -41,11 +39,6 @@ const orderSchema = new mongoose.Schema(
         created_at:{
             type: Date,
             requred: true,
-            default: Date.now
-        },
-        finish_date:{
-            type: Date,
-            required: true,
             default: Date.now
         },
         total_price: {

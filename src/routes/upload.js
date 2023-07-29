@@ -8,7 +8,7 @@ const router = express.Router();
 const storage = new CloudinaryStorage({
     cloudinary: cloudinary,
     params: {
-        folder: "WE17301",
+        folder: "images",
         format: "png",
     },
 });

@@ -1,19 +1,19 @@
+import { v2 as cloudinary } from "cloudinary";
 import { CloudinaryStorage } from "multer-storage-cloudinary";
 import multer from "multer";
-import {v2 as cloudinary} from 'cloudinary';
 
 export const uploadMulter = (req, res, next) => {
-          
-    cloudinary.config({ 
-      cloud_name: 'dpwvvocuk', 
-      api_key: '479213657589177', 
-      api_secret: 'enUF5so3eD_zwIyMrnzEVcrmnwI' 
+
+    cloudinary.config({
+        cloud_name: 'datn2023',
+        api_key: '599889761454191',
+        api_secret: 'KxapOdFY80vXtK4K7rMjFcWBEnA'
     });
 
     const storage = new CloudinaryStorage({
         cloudinary: cloudinary,
         params: {
-            folder: "WE17301",
+            folder: "images",
             format: "png",
             public_id: "some_unique_id",
         },

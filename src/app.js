@@ -19,6 +19,8 @@ import morgan from 'morgan';
 import routerBills from './routes/bills';
 import routerImage from './routes/product_image';
 import routerProductCate from './routes/product_category';
+import routerUser from './routes/user';
+import routerUploadImage from './routes/upload';
 
 dotenv.config()
 const app = express();
@@ -62,11 +64,6 @@ app.use("/api",routerDetail)
 app.use("/api",routerBills)
 app.use("/api", routerImage)
 app.use("/api", routerProductCate)
-app.use("/api",productentryRouter);
-app.use("/api",productsize);
-app.use("/api",productcolor);
-app.use("/api",routerUpload)    ;
-
 
 
 app.use("/api", userRouter)
