@@ -6,7 +6,7 @@ const order_detail_Schema = new mongoose.Schema(
     {
         product_entry_id:{
             type: mongoose.Types.ObjectId,
-            ref: "Product_enties"
+            ref: "Product_Entry"
         },
         order_id:{
             type: mongoose.Types.ObjectId,
