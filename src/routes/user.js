@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { Create, Get, GetAll, editStatus, remove, update } from "../controllers/user.js";
+import {  Get, GetAll, editStatus, update } from "../controllers/user.js";
 import express from "express";
 import { signin,signup } from "../controllers/f-user";
 
@@ -7,7 +7,6 @@ const router = express.Router();
 
 router.post("/auth/signup", signup);
 router.post("/auth/signin", signin);
-
 router.get("/User", GetAll);
 router.get("/User/:id", Get);
 router.put("/User/:id", update);
