@@ -55,7 +55,7 @@ app.use("/api",routerDetail)
 app.use("/api",routerBills)
 app.use("/api", routerImage)
 app.use("/api", routerProductCate)
-app.use("/auth", routerUser)
+app.use("/api", routerUser)
 app.use("/api", routerUploadImage)
 
 

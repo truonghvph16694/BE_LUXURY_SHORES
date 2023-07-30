@@ -6,8 +6,8 @@ dotenv.config();
 
 
 const order_detail_Schema = Joi.object({
-    product_entry_id: Joi.number().required(),
-    order_id: Joi.number().required(),
+    // product_entry_id: Joi.number().required(),
+    // order_id: Joi.number().required(),
     price: Joi.number().required(),
     quantity: Joi.number().required()
 });
