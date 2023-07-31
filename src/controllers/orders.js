@@ -6,7 +6,7 @@ dotenv.config();
 
 
 const orderSchema = Joi.object({
-    user_id: Joi.number().required(),
+    // user_id: Joi.number().required(),
     province_id: Joi.string().required(),
     district_id: Joi.string().required(),
     ward_id: Joi.string().required(),

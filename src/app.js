@@ -7,7 +7,9 @@ import categoryRouter from './routes/category'
 import productRouter from "./routes/product";
 import routerOrders from './routes/orders';
 import routerDetail from './routes/order-detail';
-
+import productentryRouter from './routes/product_entry';
+import productsize from './routes/product_size';
+import productcolor from './routes/product_color';
 
 import morgan from 'morgan';
 import routerBills from './routes/bills';
@@ -57,6 +59,9 @@ app.use("/api", routerImage)
 app.use("/api", routerProductCate)
 app.use("/api", routerUser)
 app.use("/api", routerUploadImage)
+app.use("/api",productentryRouter);
+app.use("/api",productsize);
+app.use("/api",productcolor);
 
 
 app.listen(port , () =>{

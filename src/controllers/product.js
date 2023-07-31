@@ -9,7 +9,7 @@ const productSchema = joi.object({
     name: joi.string().required(),
     price: joi.number().required(),
     description: joi.string(),
-    categoryId: joi.string(),
+    // categoryId: joi.string(),
     discount: joi.number().required(),
     thumbnail: joi.number().required(),
     created_at: joi.date(),

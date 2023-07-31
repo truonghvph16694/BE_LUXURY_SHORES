@@ -28,7 +28,7 @@ export const getAll = async (req, res) => {
                     from: 'product_entries',
                     localField: 'product_entry_id',
                     foreignField: '_id',
-                    as: 'product_entry',
+                    as: 'product_entries',
                 },
             }, {
                 $unwind: {
