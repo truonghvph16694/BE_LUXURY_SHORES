@@ -15,7 +15,7 @@ import morgan from 'morgan';
 import routerBills from './routes/bills';
 import routerImage from './routes/product_image';
 import routerProductCate from './routes/product_category';
-import routerUser from './routes/user';
+import routerUser from './routes/f-user';
 import routerUploadImage from './routes/upload';
 
 dotenv.config()
