@@ -1,7 +1,7 @@
 import joi from "joi";
 
 export const signupSchema = joi.object({
-    fullname: joi.string().required(),
+    // fullname: joi.string().required(),
     email: joi.string().email().required().messages({
         "string.email": "Email không đúng định dạng",
         "string.empty": "Email không được để trống",
@@ -12,14 +12,14 @@ export const signupSchema = joi.object({
         "string.empty": "Password không được để trống",
         "any.required": "Trường Password là bắt buộc",
     }),
-    confirmPassword: joi.string().valid(joi.ref("password")).required().messages({
-        "any.only": "Password không khớp",
-        "any.required": "Trường confirm password là bắt buộc",
-    }),
-    phone: joi.string().required().min(10).max(10).messages({
-        "number.emty": "Phone Number không được để trống",
-        "any.required": "Phone Number là bắt buộc"
-    })
+    // confirmPassword: joi.string().valid(joi.ref("password")).required().messages({
+    //     "any.only": "Password không khớp",
+    //     "any.required": "Trường confirm password là bắt buộc",
+    // }),
+    // phone: joi.string().required().min(10).max(10).messages({
+    //     "number.emty": "Phone Number không được để trống",
+    //     "any.required": "Phone Number là bắt buộc"
+    // })
 });
 export const signinSchema = joi.object({
     email: joi.string().email().required().messages({

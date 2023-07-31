@@ -2,10 +2,10 @@ import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema(
     {
-        fullname: {
-            type: String,
-            require:true
-        },
+        // fullname: {
+        //     type: String,
+        //     require:true
+        // },
         email: {
             type: String,
             unique: true,
@@ -16,11 +16,10 @@ const userSchema = new mongoose.Schema(
             require: true,
             minlength: 6,
         },
-        phone: {
-            type: String, 
-            require: true
-        }
-        ,
+        // phone: {
+        //     type: String, 
+        //     require: true
+        // }
         type: {
             type: String,
             enum: ["admin", "member"],
