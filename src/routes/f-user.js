@@ -1,10 +1,15 @@
-import express from "express";
-import { logout, signin,signup } from "../controllers/f-user";
+import { Router } from "express";
+import { Create, Get, GetAll, editStatus, remove, update, signin, signup } from "../controllers/user.js";
 
-const route = express.Router();
 
-route.post("/auth/signup", signup);
-route.post("/auth/signin", signin);
-route.post("/auth/logout", logout);
+const router = Router();
 
-export default route;
+router.post("/signup", signup);
+router.post("/signin", signin);
+router.get("/User", GetAll);
+router.get("/User/:id", Get);
+router.post("/User",Create)
+router.put("/User/:id", update);
+router.delete("/User/:id", remove);
+router.put("/User/status/:id", editStatus);
+export default router;

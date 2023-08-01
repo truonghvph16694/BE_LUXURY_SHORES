@@ -10,4 +10,4 @@ router.post("/products", create)
 router.patch("/products/:id", authenticate, update);
 router.delete("/products/:id", authenticate, remove);
 
-export default router;
+export default router;      

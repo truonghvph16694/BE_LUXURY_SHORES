@@ -5,10 +5,10 @@ import mongoosePaginate from "mongoose-paginate-v2";
 const product_image_Schema = new mongoose.Schema(
     {
         product_entry_id:{
-            // type: mongoose.Types.ObjectId,
-            type: Number,
+            type: mongoose.Types.ObjectId,
+            // type: Number,
             required: true,
-            // ref: "Product_Entry"
+            ref: "Product_Entry"
         },
         path:{
             type: String,
