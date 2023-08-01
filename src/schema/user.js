@@ -12,10 +12,10 @@ export const signupSchema = joi.object({
         "string.empty": "Password không được để trống",
         "any.required": "Trường Password là bắt buộc",
     }),
-    confirmPassword: joi.string().valid(joi.ref("password")).required().messages({
-        "any.only": "Password không khớp",
-        "any.required": "Trường confirm password là bắt buộc",
-    }),
+    // confirmPassword: joi.string().valid(joi.ref("password")).required().messages({
+    //     "any.only": "Password không khớp",
+    //     "any.required": "Trường confirm password là bắt buộc",
+    // }),
     phone: joi.string().required().min(10).max(10).messages({
         "number.emty": "Phone Number không được để trống",
         "any.required": "Phone Number là bắt buộc"
