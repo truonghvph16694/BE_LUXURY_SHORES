@@ -7,13 +7,13 @@ import { signinSchema, signupSchema } from "../schema/user";
 
 dotenv.config();
 const salt = bcrypt.genSaltSync(10);
-const userSchema = joi.object({
+// const userSchema = joi.object({
 //     fullname: joi.string().required(),
-    email: joi.string().required(),
-    password: joi.string().required(),
+//     email: joi.string().required(),
+//     password: joi.string().required(),
 //     phone: joi.string().required(),
 //     email: joi.string().required(),
-});
+// });
 export const signup = async (req, res) => {
     try {
         const body = req.body;
@@ -38,10 +38,10 @@ export const signup = async (req, res) => {
             });
         }
         const user = await User.create({
-            // fullname: body.fullname,
+            fullname: body.fullname,
             email: body.email,
             password: hashedpassword,
-            // phone: body.phone
+            phone: body.phone
         });
         const token = jwt.sign({ id: user._id }, process.env.SECRET_KEY, {
             expiresIn: "5m",
