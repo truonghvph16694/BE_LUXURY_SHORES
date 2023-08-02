@@ -8,7 +8,6 @@ dotenv.config();
 const product_entrySchema = joi.object({
     size: joi.string().required(),
     color: joi.string().required(),
-    price: joi.number(),
     quantity: joi.number(),
 
     // categoryId: joi.string().required(),

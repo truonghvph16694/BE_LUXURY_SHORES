@@ -16,10 +16,6 @@ const userSchema = new mongoose.Schema(
             require: true,
             minlength: 6,
         },
-        phone: {
-            type: String, 
-            require: true
-        },
         type: {
             type: String,
             enum: ["admin", "member"],
