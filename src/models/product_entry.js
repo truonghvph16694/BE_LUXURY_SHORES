@@ -12,18 +12,10 @@ const product_entrySchema = new mongoose.Schema(
             type: mongoose.Types.ObjectId,
             ref: "Product_color",
         },
-        price: {
-            type: Number,
-            require: true
-        },
         quantity: {
             type: Number,
             require: true
         },
-        // status: {
-        //     type: boolean,
-        //     require: true
-        // },
         productId: {
             type: mongoose.Types.ObjectId,
             ref: "Product",

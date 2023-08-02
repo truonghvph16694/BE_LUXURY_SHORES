@@ -10,6 +10,7 @@ const productSchema = joi.object({
     name: joi.string().required(),
     description: joi.string().required(),
     categoryId: joi.string().required(),
+    price: joi.number().required(),
 });
 
 export const getAll = async (req, res) => {
@@ -30,7 +31,46 @@ export const getAll = async (req, res) => {
                     foreignField: 'productId',
                     as: 'product_entries',
                 },
+            },{
+                $unwind: '$product_entries', // Tách các phần tử trong mảng product_entries thành các documents độc lập
             },
+            {
+                $lookup: {
+                    from: 'product_colors',
+                    localField: 'product_entries.colorId',
+                    foreignField: '_id',
+                    as: 'product_entries.product_colors',
+                },
+            },
+            {
+                $unwind: '$product_entries.product_colors', // (Optional) Tách màu trong mảng product_entries.color thành các documents độc lập
+            },
+            {
+                $lookup: {
+                    from: 'product_sizes',
+                    localField: 'product_entries.sizeId',
+                    foreignField: '_id',
+                    as: 'product_entries.product_sizes',
+                },
+            },
+            {
+                $unwind: '$product_entries.product_sizes', // (Optional) Tách màu trong mảng product_entries.color thành các documents độc lập
+            },
+            {
+                $group: {
+                    _id: '$_id',
+                    name: { $first: '$name' }, // Giữ lại trường name trong kết quả
+                    description: { $first: '$description' },
+                    price: { $first: '$price' },
+                    image: { $first: '$image' },
+                    // Thêm các fields khác vào nếu cần
+                    product_entries: {
+                        $push: '$product_entries', // Gom lại các documents product_entries thành một mảng
+                    },
+                },
+            },
+      
+            
         ]);
         console.log(products)
         if (products.length === 0) {
@@ -84,10 +124,10 @@ export const create = async function (req, res) {
         //     });
         // }
         const data = req.body;
-        const product = await Product.create({ name: data.name, description: data.description, categoryId: data.categoryId });
+        const product = await Product.create({ name: data.name, description: data.description, categoryId: data.categoryId, price:data.price, image: data.image });
         // them nhieu product_entry
         data.product_entrys.map((item) => {
-            product_entry.create({ productId: product._id, colorId: item.colorId, sizeId: item.sizeId, price: item.price, quantity: item.quantity });
+            product_entry.create({ productId: product._id, colorId: item.colorId, sizeId: item.sizeId , quantity: item.quantity });
         });
         if (!product) {
             return res.json({
