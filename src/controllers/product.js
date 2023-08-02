@@ -76,6 +76,7 @@ export const get = async function (req, res) {
     }
 };
 export const create = async function (req, res) {
+    console.log('req',req);
     try {
         // const { error } = productSchema.validate(req.body);
         // if (error) {

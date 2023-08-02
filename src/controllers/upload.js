@@ -1,19 +1,19 @@
 import cloudinary from "../config/cloudinaryConfig";
 
 export const uploadImage = async (req, res) => {
-    console.log(req )
-    // const images = req.files.map((file) => file.path);
+    // console.log(req )
+    const images = req.files.map((file) => file.path);
 
-    // const uploadedImages = [];
-    // for (const image of images) {
-    //     try {
-    //         const result = await cloudinary.uploader.upload(image);
-    //         uploadedImages.push({ url: result.secure_url, publicId: result.public_id });
-    //     } catch (error) {
-    //         console.log(error);
-    //     }
-    // }
-    // return res.json({ urls: uploadedImages });
+    const uploadedImages = [];
+    for (const image of images) {
+        try {
+            const result = await cloudinary.uploader.upload(image);
+            uploadedImages.push({ url: result.secure_url, publicId: result.public_id });
+        } catch (error) {
+            console.log(error);
+        }
+    }
+    return res.json({ urls: uploadedImages });
 };
 
 export const deleteImage = async (req, res) => {
