@@ -62,7 +62,7 @@ app.use("/api",routerOrders);
 app.use("/api",feedbackRouter)
 app.use("/api",routerDetail)
 app.use("/api",routerBills)
-app.use("/api", routerImage)
+// app.use("/api", routerImage)
 app.use("/api", routerProductCate)
 app.use("/api",productentryRouter);
 app.use("/api",productsize);

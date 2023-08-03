@@ -6,8 +6,8 @@ dotenv.config();
 
 
 const order_detail_Schema = Joi.object({
-    product_entry_id: Joi.number().required(),
-    order_id: Joi.number().required(),
+    // product_entry_id: Joi.number().required(),
+    // order_id: Joi.number().required(),
     price: Joi.number().required(),
     quantity: Joi.number().required()
 });
@@ -28,7 +28,7 @@ export const getAll = async (req, res) => {
                     from: 'product_entries',
                     localField: 'product_entry_id',
                     foreignField: '_id',
-                    as: 'product_entry',
+                    as: 'product_entries',
                 },
             }, {
                 $unwind: {

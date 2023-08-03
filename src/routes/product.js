@@ -1,7 +1,7 @@
 import express from "express";
 import { create, getAll, get, remove, update } from "../controllers/product";
-import authenticate from "../middlewares/authenticate";
-// import { checkPermission } from "../middlewares/checkPermission";
+// import { authenticate } from "../middlewares/authenticate";
+
 const router = express.Router();
 
 router.get("/products", getAll);

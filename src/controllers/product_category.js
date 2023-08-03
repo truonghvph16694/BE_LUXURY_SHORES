@@ -6,8 +6,8 @@ dotenv.config();
 
 
 const product_cate_Schema = Joi.object({
-    product_id: Joi.number().required(),
-    category_id: Joi.number().required()
+    // product_id: Joi.number().required(),
+    // category_id: Joi.number().required()
 });
 
 export const getAll = async (req, res) => {

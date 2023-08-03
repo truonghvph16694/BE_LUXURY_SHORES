@@ -1,7 +1,8 @@
 import { Router } from "express";
 import {  Get, GetAll, editStatus, update } from "../controllers/user.js";
 import express from "express";
-import { signin,signup } from "../controllers/user";
+import { signin,signup } from "../controllers/f-user";
+import authenticate from "../middlewares/authenticate.js";
 
 const router = express.Router();
 

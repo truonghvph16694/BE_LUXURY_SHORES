@@ -6,7 +6,7 @@ dotenv.config();
 
 
 const bills_Schema = Joi.object({
-    user_id: Joi.number().required(),
+    // user_id: Joi.number().required(),
     code: Joi.number().required(),
     VAT: Joi.number().required(),
     total_price: Joi.number().required(),
