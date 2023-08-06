@@ -6,8 +6,8 @@ dotenv.config();
 
 
 const images_Schema = Joi.object({
-    product_entry_id: Joi.number().required(),
-    path: Joi.string().required()
+    // product_entry_id: Joi.number().required(),
+    // path: Joi.string().required()
 });
 
 export const getAll = async (req, res) => {

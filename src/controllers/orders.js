@@ -6,16 +6,15 @@ dotenv.config();
 
 
 const orderSchema = Joi.object({
-    user_id: Joi.number().required(),
+    // user_id: Joi.object().required(),
     province_id: Joi.string().required(),
     district_id: Joi.string().required(),
     ward_id: Joi.string().required(),
     detail_address: Joi.string().required(),
-    fullname: Joi.string().required(),
     note: Joi.string().required(),
     ships: Joi.number(),
     status: Joi.number().required(),
-    finish_date: Joi.date(),
+    status_payment: Joi.number(). required(),
     create_at: Joi.date(),
     total_price: Joi.number().required()
 });

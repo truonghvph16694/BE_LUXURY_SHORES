@@ -1,27 +1,46 @@
-import jwt from 'jsonwebtoken'
-import User from '../models/user'
+import jwt from "jsonwebtoken";
+import dotenv from "dotenv";
+import User from "../models/user";
+dotenv.config();
 
-const authenticate = async (req, res, next) => {
+export const authenticate = async (req, res, next) => {
     try {
-        let accessToken = req.headers.authorization
-        accessToken = accessToken.split(" ")[1]
-
-        if (!accessToken) {
-            throw new Error("Bạn chưa đăng nhập");
+        if (!req.headers.authorization) {
+            return res.status(401).json({
+                message: "Unauthorized",
+            });
         }
+        const token = req.headers.authorization.split(" ")[1];
 
-        const {_id} = jwt.verify(accessToken, process.env.SECRET_KEY)
-        const user = await User.findById(_id)
-        if(!user || user.type !== "admin"){
-            throw new Error("Bạn không có quyền truy cập tài nguyên này");
-        }
+        jwt.verify(token, process.env.SECRET_KEY, async (error, payload) => {
+            if (error) {
+                if (error.name === "JsonWebTokenError") {
+                    return res.status(401).json({
+                        message: "Token không hợp lệ",
+                    });
+                }
+                if (error.name == "TokenExpiredError") {
+                    return res.status(401).json({
+                        message: "Token hết hạn",
+                    });
+                }
+            }
 
-        next()
-    } catch(err) {
-        res.status(500).send({
-            message: err.message || "Token không hợp lệ"
-        })
-    }
-}
+            const user = await User.findById(payload._id);
+            if (!user) {
+                return res.status(401).json({
+                    message: "Unauthorized",
+                });
+            }
+            if (user.role !== "admin") {
+                return res.status(401).json({
+                    message: "Bạn không có quyền truy cập tài nguyên",
+                });
+            }
 
-export default authenticate
+            req.user = user;
+            next();
+        });
+    } catch (error) {}
+};
+

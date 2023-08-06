@@ -8,10 +8,10 @@ const billSchema = new mongoose.Schema(
             type: mongoose.Types.ObjectId,
             ref: "User"
         },
-        code:{
-            type: Number,  
-            required: true,
-        },
+        // code:{
+        //     type: Number,  
+        //     required: true,
+        // },
         VAT:{
             type: Number,
             required: true,

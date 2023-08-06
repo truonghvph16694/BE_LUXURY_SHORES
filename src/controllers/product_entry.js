@@ -7,7 +7,7 @@ import Product_entry from "../models/product_entry";
 dotenv.config();
 const product_entrySchema = joi.object({
     size: joi.string().required(),
-    color: joi.string().required(),
+    // color: joi.string().required(),
     quantity: joi.number(),
 
     // categoryId: joi.string().required(),

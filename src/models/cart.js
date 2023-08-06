@@ -1,18 +1,19 @@
 import mongoosePaginate from "mongoose-paginate-v2";
-import mongoose, {ObjectId} from "mongoose";
+import mongoose, { ObjectId } from "mongoose";
 
-
-const cartSchema = new mongoose.Schema({
-    products:  {
-        type: [],
-        require: true
-    }, 
-    userID: {
-        type: ObjectId,
-        ref: "User"
+const cartSchema = new mongoose.Schema(
+  {
+    product_entries: {
+      type: [],
+      require: true,
     },
-
-}, { timestamps: true });
+    userID: {
+      type: ObjectId,
+      ref: "User",
+    },
+  },
+  { timestamps: true }
+);
 
 cartSchema.plugin(mongoosePaginate);
 
