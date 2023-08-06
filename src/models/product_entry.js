@@ -8,10 +8,10 @@ const product_entrySchema = new mongoose.Schema(
             type: mongoose.Types.ObjectId,
             ref: "Product_size",
         },
-        colorId: {
-            type: mongoose.Types.ObjectId,
-            ref: "Product_color",
-        },
+        // colorId: {
+        //     type: mongoose.Types.ObjectId,
+        //     ref: "Product_color",
+        // },
         quantity: {
             type: Number,
             require: true

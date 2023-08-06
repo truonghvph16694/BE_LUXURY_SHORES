@@ -15,7 +15,7 @@ const productSchema = new mongoose.Schema(
             type: Number,
             require: true
         },
-        image: {type :String},
+        // image: {type :String},
         // created_at: {
         //     type: Date
         // },
