@@ -102,9 +102,48 @@ export const get = async function (req, res) {
           as: "product_entries",
         },
       },
+      {
+        $lookup: {
+          from: "product_images",
+          localField: "_id",
+          foreignField: "productId",
+          as: "product_images",
+        },
+      },
+
       // {
       //   $unwind: "$product_entries", // Tách các phần tử trong mảng product_entries thành các documents độc lập
       // },
+      // {
+      //   $lookup: {
+      //     from: "product_sizes",
+      //     localField: "product_entries.sizeId",
+      //     foreignField: "_id",
+      //     as: "product_entries.product_sizes",
+      //   },
+      // },
+      // {
+      //   $unwind: "$product_entries.product_sizes", // (Optional) Tách màu trong mảng product_entries.color thành các documents độc lập
+      // },
+      // {
+      //   $group: {
+      //     _id: "$_id",
+      //     name: { $first: "$name" }, // Giữ lại trường name trong kết quả
+      //     description: { $first: "$description" },
+      //     price: { $first: "$price" },
+      //     image: { $first: "$image" },
+      //     // Thêm các fields khác vào nếu cần
+      //     product_entries: {
+      //       $push: "$product_entries", // Gom lại các documents product_entries thành một mảng
+      //     },
+      //     product_entries: {
+      //       $push: "$product_entries", // Gom lại các documents product_entries thành một mảng
+      //     },
+      //   },
+      // },
+      {
+        $unwind: "$product_entries", // Tách các phần tử trong mảng product_entries thành các documents độc lập
+      },
       {
         $lookup: {
           from: "product_sizes",
@@ -114,21 +153,26 @@ export const get = async function (req, res) {
         },
       },
       {
-        $unwind: "$product_entries.product_sizes", // (Optional) Tách màu trong mảng product_entries.color thành các documents độc lập
+        $unwind: "$product_entries.product_sizes", // Tách size trong mảng product_entries.product_sizes thành các documents độc lập
       },
+
       {
         $group: {
           _id: "$_id",
           name: { $first: "$name" }, // Giữ lại trường name trong kết quả
           description: { $first: "$description" },
           price: { $first: "$price" },
-          image: { $first: "$image" },
+          // image: { $first: "$image" },
           // Thêm các fields khác vào nếu cần
           product_entries: {
             $push: "$product_entries", // Gom lại các documents product_entries thành một mảng
           },
+          product_images: {
+            $push: "$product_images", // Gom lại các documents product_images thành một mảng
+          },
         },
       },
+
       {
         $match: {
           _id: new mongoose.Types.ObjectId(req.params.id), // Create an ObjectId instance with 'new'
