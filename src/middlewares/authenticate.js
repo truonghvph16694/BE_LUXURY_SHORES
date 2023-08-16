@@ -7,11 +7,11 @@ export const authenticate = async (req, res, next) => {
     try {
         if (!req.headers.authorization) {
             return res.status(401).json({
-                message: "Unauthorized",
+                message: "Unauthorized 1",
             });
         }
         const token = req.headers.authorization.split(" ")[1];
-
+        console.log('token', token);
         jwt.verify(token, process.env.SECRET_KEY, async (error, payload) => {
             if (error) {
                 if (error.name === "JsonWebTokenError") {
@@ -25,14 +25,15 @@ export const authenticate = async (req, res, next) => {
                     });
                 }
             }
-
-            const user = await User.findById(payload._id);
+            console.log(payload);
+            const user = await User.findById(payload.id);
+            console.log('user-log:', user);
             if (!user) {
                 return res.status(401).json({
-                    message: "Unauthorized",
+                    message: "Unauthorized 2",
                 });
             }
-            if (user.role !== "admin") {
+            if (user.type !== "admin") {
                 return res.status(401).json({
                     message: "Bạn không có quyền truy cập tài nguyên",
                 });

@@ -37,12 +37,21 @@ export const getAll = async (req, res) => {
                     foreignField: '_id',
                     as: 'user',
                 },
-            }, {
+            }, 
+            {
                 $unwind: {
                     path: '$user',
                     preserveNullAndEmptyArrays:true
                 },
             },
+            {
+                $lookup: {
+                    from: 'order_details',
+                    localField: '_id',
+                    foreignField: 'order_id',
+                    as: 'detail',
+                }
+            }
             
         ]);
         if (orders.length === 0) {
