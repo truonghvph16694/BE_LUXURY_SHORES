@@ -3,25 +3,25 @@ import mongoose from "mongoose";
 import mongoosePaginate from "mongoose-paginate-v2";
 
 const product_entrySchema = new mongoose.Schema(
-    {
-        sizeId: {
-            type: mongoose.Types.ObjectId,
-            ref: "Product_size",
-        },
-        // colorId: {
-        //     type: mongoose.Types.ObjectId,
-        //     ref: "Product_color",
-        // },
-        quantity: {
-            type: Number,
-            require: true
-        },
-        productId: {
-            type: mongoose.Types.ObjectId,
-            ref: "Product",
-        },
+  {
+    sizeId: {
+      type: mongoose.Types.ObjectId,
+      ref: "Product_size",
     },
-    { timestamps: true, versionKey: false }
+    // colorId: {
+    //     type: mongoose.Types.ObjectId,
+    //     ref: "Product_color",
+    // },
+    quantity: {
+      type: Number,
+      require: true,
+    },
+    productId: {
+      type: mongoose.Types.ObjectId,
+      ref: "Product",
+    },
+  },
+  { timestamps: true, versionKey: false }
 );
 product_entrySchema.plugin(mongoosePaginate);
 
