@@ -18,7 +18,7 @@ import routerUpload from "./routes/upload"
 
 import morgan from 'morgan';
 import routerBills from './routes/bills';
-import routerImage from './routes/product_image';
+// import routerImage from './routes/product_image';
 import routerProductCate from './routes/product_category';
 import routerUploadImage from './routes/upload';
 
