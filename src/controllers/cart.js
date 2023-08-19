@@ -78,6 +78,17 @@ export const getCartUser = async (req, res) => {
       {
         $unwind: "$size", // Giải phóng mảng đã kết hợp để sử dụng như một đối tượng
       },
+      {
+        $lookup: {
+          from: "product_images", // Tên bảng kết hợp
+          localField: "product_entry.productId",
+          foreignField: "productId",
+          as: "images", // Tên cho mảng kết quả
+        },
+      },
+      // {
+      //   $unwind: "$images", // Giải phóng mảng đã kết hợp để sử dụng như một đối tượng
+      // },
       // {
       //   $match: {
       //     userId: userId,
@@ -129,6 +140,37 @@ export const add = async (req, res) => {
   res.json({
     code: 200,
     // carts,
+  });
+  // } catch (error) {
+  //   res.status(400).json(error)
+  // }
+};
+export const changeQuantity = async (req, res) => {
+  // try {
+  // const { tm_codeorder } = req.body;
+  console.log("res", req.body);
+  const request = req.body;
+
+  // const exitsCart = await Cart.findOne({
+  //   _id: req.params.id,
+  // });
+  // console.log("exitsCart", exitsCart);
+  // if (exitsCart) {
+  // cộng quantity thêm 1
+  // await Cart.updateOne(
+  //   {
+  //     userId: request.userId,
+  //     product_entry_Id: request.product_entry_Id,
+  //   },
+  //   {
+  //     quantity: request.quantity,
+  //   }
+  // );
+  const cart = await Cart.findByIdAndUpdate({ _id: req.params.id }, req.body);
+  // }
+  res.json({
+    code: 200,
+    cart,
   });
   // } catch (error) {
   //   res.status(400).json(error)

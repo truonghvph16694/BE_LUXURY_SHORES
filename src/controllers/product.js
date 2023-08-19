@@ -288,7 +288,6 @@ export const update = async function (req, res) {
       new: true,
     });
 
-
     if (!product) {
       return res.json({
         message: "Cập nhật sản phẩm không thành công",
@@ -308,7 +307,7 @@ export const update = async function (req, res) {
       });
     }
     // xoá hết ảnh cũ
-  await product_image.deleteMany({ productId: product._id });
+    await product_image.deleteMany({ productId: product._id });
 
     if (data.uploads) {
       data.uploads.map((item) => {
@@ -353,7 +352,7 @@ export const getEdit = async function (req, res) {
           foreignField: "productId",
           as: "product_entries",
         },
-      }, 
+      },
       {
         $lookup: {
           from: "product_images",
