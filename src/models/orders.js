@@ -5,10 +5,19 @@ import mongoosePaginate from "mongoose-paginate-v2";
 const orderSchema = new mongoose.Schema(
     {
         user_id: {
-            type: mongoose.Types.ObjectId,
-            ref: "User"
+            // type: mongoose.Types.ObjectId,
+            type: String,
+            // ref: "User"
         },
-        province_id:{
+        fullname: {
+            type: String,
+            required: true,
+        },
+        phone: {
+            type: String,
+            required: true
+        },
+        province_id: {
             type: String,
             required: true
         },
@@ -20,7 +29,7 @@ const orderSchema = new mongoose.Schema(
             type: String,
             reuired: true
         },
-        detail_address:{
+        detail_address: {
             type: String,
             required: true
         },
@@ -29,19 +38,20 @@ const orderSchema = new mongoose.Schema(
         },
         status: {
             type: Number,
-            required: true
+            required: true,
+            default: 0
         },
         status_payment: {
             type: Number,
             required: true,
             default: 0
         },
-        ships:{
+        ships: {
             type: Number,
             required: true,
             default: 20000
         },
-        created_at:{
+        created_at: {
             type: Date,
             requred: true,
             default: Date.now
@@ -50,7 +60,7 @@ const orderSchema = new mongoose.Schema(
             type: Number,
             required: true
         },
-        payment:{
+        payment: {
             type: Number,
             reuired: true,
             default: 0
@@ -62,4 +72,4 @@ const orderSchema = new mongoose.Schema(
 );
 orderSchema.plugin(mongoosePaginate);
 
-export default mongoose.model("Orders",orderSchema);
+export default mongoose.model("Orders", orderSchema);

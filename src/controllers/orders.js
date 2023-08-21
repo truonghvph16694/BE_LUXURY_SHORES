@@ -6,16 +6,18 @@ dotenv.config();
 
 
 const orderSchema = Joi.object({
-    // user_id: Joi.object().required(),
-    province_id: Joi.string().required(),
-    district_id: Joi.string().required(),
-    ward_id: Joi.string().required(),
+    user_id: Joi.string().required(),
+    fullname: Joi.string().required(),
+    phone: Joi.string().required(),
+    province_id: Joi.number().required(),
+    district_id: Joi.number().required(),
+    ward_id: Joi.number().required(),
     detail_address: Joi.string().required(),
-    note: Joi.string().required(),
-    ships: Joi.number(),
-    status: Joi.number().required(),
-    status_payment: Joi.number(). required(),
-    create_at: Joi.date(),
+    note: Joi.string(),
+    // ships: Joi.number(),
+    // status: Joi.number().required(),
+    // status_payment: Joi.number(). required(),
+    // create_at: Joi.date(),
     total_price: Joi.number().required()
 });
 
