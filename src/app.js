@@ -24,10 +24,10 @@ import routerUploadImage from "./routes/upload";
 
 dotenv.config();
 const app = express();
-app.use(express.json());
+// app.use(express.json());
 app.use(cors());
 app.use(morgan("tiny"));
-app.use(bodyParser.json());
+// app.use(bodyParser.json());
 
 // mongoose.connect("mongodb://127.0.0.1:27017/datn")
 // .then(() =>{
@@ -38,6 +38,10 @@ app.use(bodyParser.json());
 // })
 
 //Router
+app.use(express.json({ limit: "100mb" }));
+app.use(bodyParser.urlencoded({ limit: "100mb", extended: true }));
+
+app.use(express.json());
 app.use("/api", categoryRouter);
 const port = process.env.PORT || 8000;
 
