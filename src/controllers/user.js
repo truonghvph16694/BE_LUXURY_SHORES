@@ -80,7 +80,7 @@ export const signin = async (req, res) => {
                 message: "Tài khoản hoặc mật khẩu sai",
             });
         }
-        const token = jwt.sign({ id: user._id }, process.env.SECRET_KEY, {expiresIn: "5m"});
+        const token = jwt.sign({ id: user._id }, process.env.SECRET_KEY, {expiresIn: "1d"});
         return res.status(200).send({
             message: "Đăng nhập thành công",
             accessToken: token,
