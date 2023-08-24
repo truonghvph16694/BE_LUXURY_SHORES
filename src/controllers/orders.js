@@ -109,6 +109,7 @@ export const create = async function (req, res) {
     return res.json({
       message: "Thêm đơn hàng thành công",
       data: order,
+      status: 200,
     });
   } catch (error) {
     return res.status(400).json({

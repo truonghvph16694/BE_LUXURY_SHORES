@@ -52,7 +52,7 @@ const orderSchema = new mongoose.Schema(
     ships: {
       type: Number,
       required: true,
-      default: 20000,
+      default: 30000,
     },
     created_at: {
       type: Date,
