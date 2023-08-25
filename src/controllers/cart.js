@@ -36,7 +36,7 @@ export const getAll = async (req, res) => {
   }
 };
 export const getCartUser = async (req, res) => {
-  console.log("req", req.params.user_id);
+  // console.log("req", req.params.user_id);
   try {
     // const exitsCart = await Cart.find({
     //   userId: req.params.user_id,
@@ -103,6 +103,7 @@ export const getCartUser = async (req, res) => {
     //     path: "ProductId",
     //   },
     // });
+
     return res.json(result);
   } catch (error) {
     return res.status(400).json({

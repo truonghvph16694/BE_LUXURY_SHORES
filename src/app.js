@@ -15,7 +15,7 @@ import productcolor from "./routes/product_color";
 import userRouter from "./routes/user";
 import cartRouter from "./routes/cart";
 import routerUpload from "./routes/upload";
-
+import routerVNPAY from "./routes/vnpay";
 import morgan from "morgan";
 import routerBills from "./routes/bills";
 import routerImage from "./routes/product_image";
@@ -77,6 +77,7 @@ app.use("/api", routerUpload);
 app.use("/api", routerUploadImage);
 app.use("/api", userRouter);
 app.use("/api", cartRouter);
+app.use("/api", routerVNPAY);
 
 app.listen(port, () => {
   console.log("Service is running on port", port);
