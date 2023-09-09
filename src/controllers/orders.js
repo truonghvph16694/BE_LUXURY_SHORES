@@ -1,7 +1,7 @@
 import dotenv from "dotenv";
 import Joi from "joi";
 import Orders from "../models/orders";
-
+import Cart from "../models/cart";
 dotenv.config();
 
 const orderSchema = Joi.object({
@@ -106,6 +106,9 @@ export const create = async function (req, res) {
         message: "Không thể thêm đơn hàng",
       });
     }
+
+    await Cart.deleteMany({ userId: body.user_id }).exec();
+
     return res.json({
       message: "Thêm đơn hàng thành công",
       data: order,

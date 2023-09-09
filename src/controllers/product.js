@@ -379,3 +379,41 @@ export const getEdit = async function (req, res) {
     });
   }
 };
+
+export const countProduct = async function (req, res) {
+  try {
+    const product = await Product.aggregate([
+      {
+        $lookup: {
+          from: "product_entries",
+          localField: "_id",
+          foreignField: "productId",
+          as: "product_entries",
+        },
+      },
+      {
+        $lookup: {
+          from: "product_images",
+          localField: "_id",
+          foreignField: "productId",
+          as: "product_images",
+        },
+      },
+      {
+        $match: {
+          _id: new mongoose.Types.ObjectId(req.params.id), // Create an ObjectId instance with 'new'
+        },
+      },
+    ]);
+    if (!product) {
+      return res.json({
+        message: "Không có sản phẩm nào",
+      });
+    }
+    return res.json(product);
+  } catch (error) {
+    return res.status(400).json({
+      message: error,
+    });
+  }
+};

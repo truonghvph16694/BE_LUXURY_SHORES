@@ -86,23 +86,16 @@ export const getCartUser = async (req, res) => {
           as: "images", // Tên cho mảng kết quả
         },
       },
-      // {
-      //   $unwind: "$images", // Giải phóng mảng đã kết hợp để sử dụng như một đối tượng
-      // },
-      // {
-      //   $match: {
-      //     userId: new mongoose.Types.ObjectId(req.params.id),
-      //   },
-      // },
+      {
+        $unwind: "$images", // Giải phóng mảng đã kết hợp để sử dụng như một đối tượng
+      },
+      {
+        $match: {
+          userId: new mongoose.Types.ObjectId(req.params.user_id),
+        },
+      },
     ]);
-    // const cartsWithProductInfo = await Cart.find({
-    //   userId: req.params.user_id,
-    // }).populate({
-    //   path: "product_entry_Id",
-    //   populate: {
-    //     path: "ProductId",
-    //   },
-    // });
+
 
     return res.json(result);
   } catch (error) {

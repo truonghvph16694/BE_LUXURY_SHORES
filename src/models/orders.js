@@ -68,6 +68,14 @@ const orderSchema = new mongoose.Schema(
       reuired: true,
       default: 0,
     },
+    tm_codeorder: {
+      type: String,
+      require: true,
+      // default: "A1111",
+    },
+    linkpay: {
+      type: String,
+    },
   },
   {
     timestamps: true,
