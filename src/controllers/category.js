@@ -11,8 +11,8 @@ const categorySchema = Joi.object({
 export const removeProductFromCategory = async (req, res) => {
   const categoryId = req.params.id;
   const productId = req.params.id.productId;
-  console.log("cateid", categoryId);
-  console.log("pid", productId);
+  // console.log("cateid", categoryId);
+  // console.log("pid", productId);
   try {
     // Check if the category exists
     const category = await Category.findById(categoryId);
@@ -23,7 +23,7 @@ export const removeProductFromCategory = async (req, res) => {
     // Check if the product exists
     const products = await product.find({ categoryId: categoryId });
     return products;
-    console.log("product", product);
+    // console.log("product", product);
     if (!product) {
       return res.status(404).json({ error: "Product not found" });
     }
@@ -39,35 +39,45 @@ export const removeProductFromCategory = async (req, res) => {
 
     res.json({ message: "Product removed from category successfully" });
   } catch (error) {
-    console.log("Failed to remove product from category", error);
+    // console.log("Failed to remove product from category", error);
     res.status(500).json({ error: "Failed to remove product from category" });
   }
 };
 
 export const getProductsByCategory = async (req, res) => {
   const categoryId = req.params.id;
-  console.log("idcate", categoryId);
+  // console.log("idcate", categoryId);
   try {
     // Tìm danh mục dựa trên ID
     const category = await Category.findById(categoryId);
-    console.log("object", category);
+    // console.log("object", category);
     if (!category) {
       return res.status(404).json({ error: "Category not found" });
     }
 
     // Tìm các sản phẩm thuộc danh mục
     const products = await product.find({ categoryId: categoryId });
-    console.log("PR", products);
+    // console.log("PR", products);
     res.json(products);
   } catch (error) {
-    console.log("Failed to fetch products", error);
+    // console.log("Failed to fetch products", error);
     res.status(500).json({ error: "Failed to fetch products" });
   }
 };
 
 export const getAll = async (req, res) => {
   try {
-    const categories = await Category.find();
+    // const categories = await Category.find();
+    const categories = await Category.aggregate([
+      {
+        $lookup: {
+          from: "products",
+          localField: "_id",
+          foreignField: "categoryId",
+          as: "products",
+        },
+      },
+    ]);
     if (categories.length === 0) {
       return res.json({
         message: "Không có danh mục nào",
@@ -141,7 +151,7 @@ export const create = async function (req, res) {
       });
     }
     const category = await Category.create(req.body);
-    console.log(category);
+    // console.log(category);
     if (!category) {
       return res.json({
         message: "Không thêm được danh mục",
@@ -164,7 +174,7 @@ export const update = async function (req, res) {
       req.body,
       { new: true }
     );
-    console.log(category2);
+    // console.log(category2);
     if (!category2) {
       return res.json({
         message: "Cập nhật danh mục không thành công",

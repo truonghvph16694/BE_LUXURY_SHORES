@@ -16,7 +16,7 @@ router.get("/category", getAll);
 router.get("/category/:id", get);
 router.get("/category/:id/products", getProductsByCategory);
 router.post("/category", authenticate, create);
-router.delete("/category/:id", authenticate, remove);
+router.delete("/category/:id", remove);
 router.put("/category/:id", authenticate, update);
 router.delete(
   "/category/:id/products/",

@@ -36,7 +36,7 @@ export const getAll = async (req, res) => {
   }
 };
 export const getCartUser = async (req, res) => {
-  // console.log("req", req.params.user_id);
+  // // console.log("req", req.params.user_id);
   try {
     // const exitsCart = await Cart.find({
     //   userId: req.params.user_id,
@@ -96,7 +96,6 @@ export const getCartUser = async (req, res) => {
       },
     ]);
 
-
     return res.json(result);
   } catch (error) {
     return res.status(400).json({
@@ -107,14 +106,14 @@ export const getCartUser = async (req, res) => {
 export const add = async (req, res) => {
   // try {
   // const { tm_codeorder } = req.body;
-  console.log("res", req.body);
+  // console.log("res", req.body);
   const request = req.body;
 
   const exitsCart = await Cart.findOne({
     userId: request.userId,
     product_entry_Id: request.product_entry_Id,
   });
-  console.log("exitsCart", exitsCart);
+  // console.log("exitsCart", exitsCart);
   if (exitsCart) {
     // cộng quantity thêm 1
     await Cart.updateOne(
@@ -142,13 +141,13 @@ export const add = async (req, res) => {
 export const changeQuantity = async (req, res) => {
   // try {
   // const { tm_codeorder } = req.body;
-  console.log("res", req.body);
+  // console.log("res", req.body);
   const request = req.body;
 
   // const exitsCart = await Cart.findOne({
   //   _id: req.params.id,
   // });
-  // console.log("exitsCart", exitsCart);
+  // // console.log("exitsCart", exitsCart);
   // if (exitsCart) {
   // cộng quantity thêm 1
   // await Cart.updateOne(

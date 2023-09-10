@@ -2,6 +2,7 @@ import dotenv from "dotenv";
 import Joi from "joi";
 import Orders from "../models/orders";
 import Cart from "../models/cart";
+import ProducEntry from "../models/product_entry";
 dotenv.config();
 
 const orderSchema = Joi.object({
@@ -89,36 +90,46 @@ export const get = async function (req, res) {
 };
 
 export const create = async function (req, res) {
-  try {
-    const body = req.body;
-    console.log("object", req);
-    const { error } = orderSchema.validate(body);
+  // try {
+  const body = req.body;
+  // console.log("object", req.body);
+  const { error } = orderSchema.validate(body);
 
-    // if (error) {
-    //   return res.status(400).json({
-    //     message: error.details[0].message,
-    //   });
-    // }
-    const order = await Orders.create(body);
-    // console.log(order);
-    if (!order) {
-      return res.json({
-        message: "Không thể thêm đơn hàng",
-      });
-    }
+  // if (error) {
+  //   return res.status(400).json({
+  //     message: error.details[0].message,
+  //   });
+  // }
+  const order = await Orders.create(body);
 
-    await Cart.deleteMany({ userId: body.user_id }).exec();
-
+  body.product.map(async (entry) => {
+    // Giảm quantity đi
+    const productIdToUpdate = entry.product_entry_Id; // ID của sản phẩm cần cập nhật
+    const decrementAmount = entry.quantity; // Số lượng giảm
+    await ProducEntry.updateOne(
+      { _id: productIdToUpdate },
+      { $inc: { quantity: -decrementAmount } } // Sử dụng $inc để giảm giá trị
+    );
+  });
+  // console.log(order);
+  if (!order) {
     return res.json({
-      message: "Thêm đơn hàng thành công",
-      data: order,
-      status: 200,
-    });
-  } catch (error) {
-    return res.status(400).json({
-      message: error,
+      message: "Không thể thêm đơn hàng",
     });
   }
+
+  // await Cart.deleteMany({ userId: body.user_id }).exec();
+
+  return res.json({
+    message: "Thêm đơn hàng thành công",
+    data: order,
+    status: 200,
+  });
+  // } catch (error) {
+  //   return res.status(400).json({
+  //     message: error,
+  //   });
+  // }
 };
 
 export const update = async function (req, res) {
@@ -126,6 +137,19 @@ export const update = async function (req, res) {
     const order = await Orders.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
     });
+
+    if (req.body.status == 4) {
+      order.product.map(async (entry) => {
+        // Giảm quantity đi
+        const productIdToUpdate = entry.product_entry_Id; // ID của sản phẩm cần cập nhật
+        const decrementAmount = entry.quantity; // Số lượng giảm
+        console.log("productIdToUpdate", productIdToUpdate, decrementAmount);
+        await ProducEntry.updateOne(
+          { _id: productIdToUpdate },
+          { $inc: { quantity: +decrementAmount } } // Sử dụng $inc để giảm giá trị
+        );
+      });
+    }
     if (!order) {
       return res.json({
         message: "Cập nhật đơn hàng không thành công",
