@@ -3,26 +3,26 @@ import mongoosePaginate from "mongoose-paginate-v2";
 
 const feedbackSchema = new mongoose.Schema(
     {
-        Order_detail_id:{
-            type: Number,
+        Order_id:{
+            type: mongoose.Types.ObjectId,
             require: true,
+            ref: "orders"
         },
-        title: {
-            type: String,
+        user_id: {
+            type: mongoose.Types.ObjectId,
             require: true,
+            ref: "users"
+        },
+        product_id: {
+            type: mongoose.Types.ObjectId,
+            require: true,
+            ref: "products"
         },
         content: {
             type: String,
             required: true,
-        },
-        vote: {
-            type: String,
-            require: true
-        },
-        status: {
-            type: Boolean,
-            require: false,
         }
+        
     }, { timestamps: true });
 feedbackSchema.plugin(mongoosePaginate);
 
