@@ -5,9 +5,7 @@ import Feedback from "../models/feedback";
 
 dotenv.config();
 const feedbackSchema = Joi.object({
-  title: Joi.string().required(),
   content: Joi.string().required(),
-  vote: Joi.string().required(),
 });
 
 export const getAll = async (req, res) => {
@@ -44,16 +42,16 @@ export const get = async function (req, res) {
 export const create = async function (req, res) {
   try {
     const body = req.body;
-    // console.log(body);
+    console.log(body);
     const { error } = feedbackSchema.validate(body);
     // console.log(error);
-    if (error) {
-      return res.status(400).json({
-        message: error.details[0].message,
-      });
-    }
-    const feedback = await Feedback.create(req.body);
-    // console.log(feedback);
+    // if (error) {
+    //   return res.status(400).json({
+    //     message: error.details[0].message,
+    //   });
+    // }
+    const feedback = await Feedback.create(body);
+    console.log(feedback);
     if (!feedback) {
       return res.json({
         message: "Không thêm được feedback",
@@ -62,6 +60,7 @@ export const create = async function (req, res) {
     return res.json({
       message: "Thêm feedback thành công",
       data: feedback,
+      status: 200,
     });
   } catch (error) {
     return res.status(400).json({
