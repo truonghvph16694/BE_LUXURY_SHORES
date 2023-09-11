@@ -94,12 +94,6 @@ export const create = async function (req, res) {
   const body = req.body;
   // console.log("object", req.body);
   const { error } = orderSchema.validate(body);
-
-  // if (error) {
-  //   return res.status(400).json({
-  //     message: error.details[0].message,
-  //   });
-  // }
   const order = await Orders.create(body);
 
   body.product.map(async (entry) => {
@@ -118,18 +112,13 @@ export const create = async function (req, res) {
     });
   }
 
-  // await Cart.deleteMany({ userId: body.user_id }).exec();
+  await Cart.deleteMany({ userId: body.user_id }).exec();
 
   return res.json({
     message: "Thêm đơn hàng thành công",
     data: order,
     status: 200,
   });
-  // } catch (error) {
-  //   return res.status(400).json({
-  //     message: error,
-  //   });
-  // }
 };
 
 export const update = async function (req, res) {
