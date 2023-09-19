@@ -294,7 +294,7 @@ export const update = async function (req, res) {
       });
     }
     // xoá hết product entry
-    product_entry.deleteMany({ productId: product._id });
+    product_entry.deleteMany({ productId: product._id }).exec();
 
     // lưu thuộc tính product_entry
     if (data.product_entrys) {
@@ -307,7 +307,7 @@ export const update = async function (req, res) {
       });
     }
     // xoá hết ảnh cũ
-    await product_image.deleteMany({ productId: product._id });
+    await product_image.deleteMany({ productId: product._id }).exec();
 
     if (data.uploads) {
       data.uploads.map((item) => {
