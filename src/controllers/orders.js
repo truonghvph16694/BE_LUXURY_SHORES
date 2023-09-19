@@ -29,10 +29,10 @@ export const getAll = async (req, res) => {
     _page = 1,
   } = req.query;
   const options = {
-    page: _page,
-    limit: _limit,
-    sort: {
-      [_sort]: _order === "desc" ? -1 : 1,
+    // $page: _page,
+    // $limit: _limit,
+    $sort: {
+      [_sort]: _order == "desc" ? -1 : 1,
     },
   };
   try {
@@ -59,6 +59,7 @@ export const getAll = async (req, res) => {
           as: "detail",
         },
       },
+      options,
     ]);
     if (orders.length === 0) {
       return res.json({

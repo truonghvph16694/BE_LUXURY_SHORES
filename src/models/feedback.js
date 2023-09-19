@@ -1,3 +1,4 @@
+import { string } from "joi";
 import mongoose from "mongoose";
 import mongoosePaginate from "mongoose-paginate-v2";
 
@@ -21,6 +22,13 @@ const feedbackSchema = new mongoose.Schema(
     content: {
       type: String,
       required: true,
+    },
+    status: {
+      type: Boolean,
+      default: true,
+    },
+    product_entry_id: {
+      type: String,
     },
   },
   { timestamps: true }
