@@ -21,6 +21,7 @@ import routerBills from "./routes/bills";
 import routerImage from "./routes/product_image";
 import routerProductCate from "./routes/product_category";
 import routerUploadImage from "./routes/upload";
+import routerMail from "./routes/mail";
 
 dotenv.config();
 const app = express();
@@ -78,6 +79,7 @@ app.use("/api", routerUploadImage);
 app.use("/api", userRouter);
 app.use("/api", cartRouter);
 app.use("/api", routerVNPAY);
+app.use("/api", routerMail);
 
 app.listen(port, () => {
   console.log("Service is running on port", port);
